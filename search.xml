@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>&quot;mvn site&quot; with maven-javadoc-plugin can&#39;t access to Javadoc (404)</title>
+      <link href="/2022/05/02/mvn-site-javadoc-404/"/>
+      <url>/2022/05/02/mvn-site-javadoc-404/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>I built a project using Maven Quickstart Archetype.</p><p>Then I followed the usage guide of the Apache Maven Javadoc Plugin, and expected to have a Javadoc included in my project documentation.</p><figure>  <img src=usage.png>  <figcaption>Apache Maven Javadoc Plugin Usage</figcaption></figure><span id="more"></span><br/><figure>  <img src=copy.png></figure><br/><p>However, I got a 404 on my Javadoc page.</p><figure>  <img src=404.png></figure><hr><h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Change the version of maven-javadoc-plugin to <strong>3.2.0</strong> to solve this problem.</p><figure>  <img src=edit.png></figure><br/><p>Compared to the target directory generated when executing “mvn site” on the <strong>3.4.0</strong> version, the one generated on the <strong>3.2.0</strong> version added files as following:</p><figure>  <img src=compare.png></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Project </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> Maven </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Dynamic Proxy and UndeclaredThrowableException</title>
+      <link href="/2022/03/24/undeclaredthrowableexception/"/>
+      <url>/2022/03/24/undeclaredthrowableexception/</url>
+      
+        <content type="html"><![CDATA[<p>In an exercise about Dynamic Proxy, I implemented a dynamic proxy that implements the Client interface by looking in the map for the name properties.</p><p>The underlying delegate object is a map, which is different from the interface that the proxy object implements (So we could say that this dynamic proxy acts as an <strong>adapter</strong>).</p><span id="more"></span><hr><h2 id="Code-Explaining"><a href="#Code-Explaining" class="headerlink" title="Code Explaining"></a>Code Explaining</h2><p>Here is a code snippet from the custom InvocationHandler:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">if (method.getDeclaringClass().equals(Object.class)) &#123;</span><br><span class="line">    // Invoke toString() and hashCode() directly on the property Map.</span><br><span class="line">    try &#123;</span><br><span class="line">      return method.invoke(properties, args);</span><br><span class="line">    &#125; catch (InvocationTargetException e) &#123;</span><br><span class="line">      throw e.getTargetException();</span><br><span class="line">    &#125; catch (IllegalAccessException e) &#123;</span><br><span class="line">      throw new RuntimeException(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>All Java objects inherit methods from Object class like toString, equals and hashCode.</p><p>In this exercise, we are not concerned about these methods. We want to intercept only get methods defined in the Client interface.</p><p>So we check whether a method is declared in the Object class, and just invoke the method with the original arguments. This is like ignoring the proxy.</p><p>But we should also take care if these methods (toString, equals, hashCode) throw an exception.</p><p>Notice that method.invoke() would rethrow that exception wrapped in an <strong>InvocationTargetException</strong>.</p><p>We don’t want to change the behavior of these methods, so we should unwrap the exception and rethrow it exactly as the method call will do if no proxy exists:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">throw e.getTargetException();</span><br></pre></td></tr></table></figure><p>But there is a special case where a <strong><a href="https://www.baeldung.com/java-undeclaredthrowableexception#java-dynamic-proxy">UndeclaredThrowableException</a></strong> may be thrown and we should treat it also.</p><p><br/><br/><br/><br/></p><p><strong><em>Reference</em></strong></p><p><em><a href="https://www.baeldung.com/java-undeclaredthrowableexception#java-dynamic-proxy">When Does Java Throw UndeclaredThrowableException?</a></em></p><p><a href="https://segmentfault.com/a/1190000012262244"><em>jdk动态代理异常处理分析， UndeclaredThrowableException</em></a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Study </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Java Learning - Design Patterns</title>
+      <link href="/2022/03/18/java-design-patterns/"/>
+      <url>/2022/03/18/java-design-patterns/</url>
+      
+        <content type="html"><![CDATA[<span id="more"></span><h2 id="Creational-Patterns"><a href="#Creational-Patterns" class="headerlink" title="Creational Patterns"></a>Creational Patterns</h2><blockquote><p>Manage the creation of objects as the code becomes increasingly complex.</p></blockquote><ol><li><strong>Singleton</strong></li></ol><ul><li>A class that has only one instance, but no clear owner.</li><li>That instance is available everywhere.</li><li>The instance is initialized only when it’s first used (<em>lazy initialization</em>).</li></ul><ol start="2"><li><strong>Builder</strong></li></ol><ul><li>A <strong>mutable factory</strong> that constructs the to-be-created object property by property.</li><li>Usually supports <strong>method chaining</strong>.</li><li>Often used to create <strong>immutable</strong> data objects.</li></ul><ol><li><strong>Abstract Factory</strong></li></ol><ul><li>The thing creating objects is also an object.</li><li>Encapsulate construction of several related objects into a single Java interface.</li><li>Hide construction details from callers.</li></ul><hr><h2 id="Behavioral-Patterns"><a href="#Behavioral-Patterns" class="headerlink" title="Behavioral Patterns"></a>Behavioral Patterns</h2><blockquote><p>Patterns that involve how different objects interact.</p></blockquote><ol><li><strong>Strategy</strong></li></ol><ul><li>You define an <strong>interface</strong> to represent a kind of <strong>task</strong> or problem.</li><li>Each concrete implementation defines a different “strategy” for solving the task.</li><li>The strategies can be swapped for each other.</li></ul><ol start="2"><li><strong>Template Method</strong></li></ol><ul><li>You define a <strong>base class</strong> or interface (<strong>template</strong>) for a procedure or algorithm.</li><li>But leave <strong>empty placeholders</strong> (blank or default <strong>method</strong>) for some parts of the procedure.</li><li>Callers fill in the blanks by <strong>extending</strong> the base class and overriding the placeholder methods.</li></ul><hr><h2 id="Structural-Patterns"><a href="#Structural-Patterns" class="headerlink" title="Structural Patterns"></a>Structural Patterns</h2><blockquote><p>Patterns that involve how objects fit together to form the structure of the software.</p></blockquote><ol><li><strong>Adapter</strong></li></ol><ul><li>Transform one API or interface into another.</li><li>Typically “wrap” an existing interface to adapt it to a different interface.</li><li>One common use of the adapter pattern is to wrap legacy APIs.</li></ul><ol start="2"><li><strong>Decorator</strong></li></ol><h4 id="Adapter-vs-Decorator"><a href="#Adapter-vs-Decorator" class="headerlink" title="*Adapter vs Decorator"></a><span style="color:red">*<strong>Adapter vs Decorator</strong></span></h4><ul><li>These patterns both “wrap” another object, called the <strong>delegate</strong>.</li><li>An <strong>Adapter</strong> returns a <strong>different interface</strong> than the delegate.</li><li>A <strong>Decorator</strong> returns the <strong>same interface</strong>, but with <strong>added functionality</strong> or responsibilities.</li></ul><hr><h2 id="Dependency-Injection"><a href="#Dependency-Injection" class="headerlink" title="Dependency Injection"></a>Dependency Injection</h2><blockquote><p>Moves the creation of dependencies to outside of your code.</p></blockquote><ul><li>Add <code>@Inject</code> annotations to inject objects from a DI framework.</li><li>Use <strong>modules</strong> to configure which classes or objects should be used when an interface is injected.</li><li>Usually can be configured to return a <strong>specific instance</strong> of an object.</li><li>Take care of indirect, or transitive, dependencies.</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Study </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Set up AWS EC2 Parse Server in Android</title>
+      <link href="/2022/03/15/set-up-aws/"/>
+      <url>/2022/03/15/set-up-aws/</url>
+      
+        <content type="html"><![CDATA[<p>I’ve learned Android along with <a href="https://www.udemy.com/course/the-complete-android-oreo-developer-course/">The Complete Android Oreo Developer Course</a>.</p><p>When I tried to finish the coursework in the Instagram Clone chapter, I was stuck in failing to set up the AWS EC2 Parse Server.</p><p>After googling many times, I finally figured it out and got access to the Parse Dashboard!🥳</p><p>If you also have trouble setting up the Parse Server, just go ahead and see if my solutions would give any help.</p><span id="more"></span><hr><h2 id="Connect-to-your-instance-using-SSH-client"><a href="#Connect-to-your-instance-using-SSH-client" class="headerlink" title="Connect to your instance using SSH client"></a>Connect to your instance using SSH client</h2><p>In Amazon Dashboard choose “Instances” from the left sidebar, and then select the instance you would like to connect to.</p><figure>  <img src=connect.png>  <figcaption>select an instance and click the Connect button</figcaption></figure><br/><figure>  <img src=ssh-client.png>  <figcaption>click on the SSH client tab</figcaption></figure><br/><p>We can just go and follow the instructions above, but there might be some unexpected problems.</p><br/><ol><li><strong>Open the terminal and locate the private key file</strong></li></ol><p>Check the <strong>.pem.txt</strong> file we’ve just downloaded when creating a new key pair.</p><p>Remove the “.txt” behind to keep it as a <strong>.pem</strong> file. This .pem file is our private key file.</p><p>Then open up the terminal and get to where the file is. In my case it’s on the desktop:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cd Desktop</span><br></pre></td></tr></table></figure><ol start="2"><li><strong>Change the permissions of the .pem file so only the root user can read it</strong></li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chmod 400 instagramandroid.pem</span><br></pre></td></tr></table></figure><ol start="3"><li><strong>Connect to your instance using its Public DNS</strong></li></ol><p>In this step, simply copying the command above might get errors.</p><p>You should verify that you are connecting with the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#TroubleshootingInstancesConnectingPuTTY">appropriate user name for your AMI</a>. In my case:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -i &quot;instagramandroid.pem&quot; bitnami@ec2-3-14-27-1.us-east-2.compute.amazonaws.com</span><br></pre></td></tr></table></figure><p>If you see something on your terminal screen like that:</p><figure>  <img src=success-connect.png></figure><br/><p>That means you’ve successfully connected to your instance.</p><hr><h2 id="Do-some-setup"><a href="#Do-some-setup" class="headerlink" title="Do some setup"></a>Do some setup</h2><p>Once you get to the screen, we need to move into where the parse code is, to do some setup.</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cd /opt/bitnami/parse</span><br></pre></td></tr></table></figure><p>Next, we have a file that we need to edit:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi config.json</span><br></pre></td></tr></table></figure><p>Inside the file, you can see the information of the server:</p><figure>  <img src=config.png></figure><br/><p>You can paste them to initialize the Parse Server in your android application.</p><hr><h2 id="Connect-to-the-Parse-Dashboard"><a href="#Connect-to-the-Parse-Dashboard" class="headerlink" title="Connect to the Parse Dashboard"></a>Connect to the Parse Dashboard</h2><p>You should be able to visit the Parse Dashboard by surfing to your server public IP address (that you can get from the AWS console) in your browser.</p><figure>  <img src=url.png></figure><br/><figure>  <img src=login.png>  <figcaption>login page for the Parse Server</figcaption></figure><br/><p>Get the user name and password in the terminal:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat bitnami_credentials</span><br></pre></td></tr></table></figure><figure>  <img src=dashboard.png>  <figcaption>log in successfully</figcaption></figure><hr><h2 id="Configure-publicServerURL"><a href="#Configure-publicServerURL" class="headerlink" title="Configure publicServerURL"></a>Configure publicServerURL</h2><p>Let’s say we upload a photo to the parse server.</p><p>When we click on the image link, it opens up a url using the localhost IP again.</p><figure>  <img src=link.png></figure><br/><figure>  <img src=localhost.png></figure><p>That’s a promblem. Because it means we can not get access to this photo in our program.</p><blockquote><p>When using files on Parse, you will need to use the publicServerURL option in your Parse Server config. This is the URL that files will be accessed from, so it should be a URL that resolves to your Parse Server. Make sure to include your mount point in this URL.</p><footer><strong>Parse's documentation</strong></footer></blockquote><p>The publicServerURL is explicitely required for those cases. Parse server injects the publicServerURL for all our files at runtime.</p><p>Every file URL is replaced at runtime, with the full URL. If we set the publicServerURL, this will be set in all the responses.</p><p>All we have to do is adding the publicServerURL parameter to the server.</p><ol><li><strong>Open the config.json file</strong></li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cd /opt/bitnami/parse</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi config.json</span><br></pre></td></tr></table></figure><ol start="2"><li><strong>Add a new line below the serverURL parameter</strong></li></ol><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;publicServerURL&quot;: &quot;http://IP/parse&quot;</span><br></pre></td></tr></table></figure><ol start="3"><li><strong>Save it and restart Parse running</strong></li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo /opt/bitnami/ctlscript.sh restart parse</span><br></pre></td></tr></table></figure><p>Now we can refresh the Parse Dashboard page, and get the photo successfully.</p><p><br/><br/><br/><br/></p><p><strong><em>Reference</em></strong></p><p><a href="https://community.bitnami.com/t/unable-to-find-opt-bitnami-apps-parse-htdocs-server-js/78200"><em>Unable to find &#x2F;opt&#x2F;bitnami&#x2F;apps&#x2F;parse&#x2F;htdocs&#x2F;server.js</em></a></p><p><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#TroubleshootingInstancesConnectingPuTTY"><em>Error: Server refused our key or No supported authentication methods available</em></a></p><p><a href="https://community.bitnami.com/t/i-cannot-or-do-not-know-how-to-connect-to-the-parse-dashboard/97505"><em>I cannot or do not know how to connect to the parse dashboard</em></a></p><p><a href="https://stackoverflow.com/questions/38648071/cant-find-password-in-aws-system-log-for-new-ami-created-from-bitnami-wordpress"><em>Can’t find password in AWS System Log for new AMI created from Bitnami Wordpress AMI</em></a></p><p><a href="https://github.com/parse-community/parse-server/issues/4290"><em>Parse Server - Image files’ path returns localhost</em></a></p><p><a href="https://community.bitnami.com/t/unable-to-download-or-view-images-i-o-error/71400"><em>Unable to download or view images</em></a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Project </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Android </tag>
+            
+            <tag> AWS </tag>
+            
+            <tag> Parse Server </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
