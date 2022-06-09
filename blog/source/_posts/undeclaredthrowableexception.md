@@ -3,7 +3,8 @@ title: Dynamic Proxy and UndeclaredThrowableException
 tags:
   - Java
 categories:
-  - Study
+  - Coding
+    - Study
 date: 2022-03-24 19:21:34
 ---
 

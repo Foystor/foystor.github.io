@@ -3,7 +3,8 @@ title: Java Learning - Design Patterns
 tags:
   - Java
 categories:
-  - Study
+  - Coding
+    - Study
 date: 2022-03-18 23:56:01
 ---
 

@@ -17,7 +17,10 @@ nav:
   home: /
   about: /about/
   articles: /archives/
+  Tags: /tags/
+  Categories: /categories/
   projects: https://github.com/Foystor
+  search: /search/
 
 
 # Links to your social media accounts.
@@ -31,7 +34,7 @@ social_links:
 
 # Customize the overview with displaying a tagcloud on the index page.
 # Options: https://hexo.io/docs/helpers.html#tagcloud
-tags_overview: true
+tags_overview: false
 
 # Customize the overview with the most recent blog posts on the index page.
 # Options:
