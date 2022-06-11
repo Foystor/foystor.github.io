@@ -14,13 +14,13 @@ Hi there!
 
 I'm Foystor. Welcome to my blog!
 
-I've worked as a frontend developer since 2021.
+I've worked as a frontend web developer since 2021.
 
 As a developer, I've experienced with:
 
-*   Vue.js, HTML, CSS, JS.
-*   WeChat Mini Programs, mpvue.
-*   Java, Android, BLE app, Parse Server.
+*   HTML/CSS, JavaScript, Vue.js, Node.js.
+*   WeChat Mini Program, mpvue.
+*   Java, Maven, Android, AWS, BLE app.
 *   A little knowledge with C# and ASP.NET Core.
 
 In addition to technical sharing, I'd like to write somthing interests me here.
