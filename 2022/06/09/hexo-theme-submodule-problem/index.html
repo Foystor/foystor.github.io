@@ -14,7 +14,7 @@
 <meta property="og:description" content="I wanted to backup the source files of my blog, but I failed to “git add .” my hexo project. It said: You&amp;#x27;ve added another git repository inside your current repository.  That was because inside">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-06-08T18:25:24.000Z">
-<meta property="article:modified_time" content="2022-06-08T21:06:52.037Z">
+<meta property="article:modified_time" content="2022-06-25T00:04:54.209Z">
 <meta property="article:author" content="Foystor">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Git">
@@ -171,20 +171,20 @@
 <ol>
 <li><strong>Get to where the theme directory is, and remove the .git folder within it</strong></li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rm -rf .git</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ rm -rf .git</span><br></pre></td></tr></table></figure>
 
 <p>We can check if it’s removed successfully by listing out all the files within it:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ls -a</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ ls -a</span><br></pre></td></tr></table></figure>
 
 <ol start="2">
 <li><strong>Remove cached files in root directory of our hexo project</strong></li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git rm -r --cached .</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git rm -r --cached .</span><br></pre></td></tr></table></figure>
 
 <ol start="3">
 <li><strong>Add and commit all files again</strong></li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git commit -am &#x27;commit message&#x27;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git commit -am &#x27;commit message&#x27;</span><br></pre></td></tr></table></figure>
 
 <p><br/><br/><br/><br/></p>
 <p><strong><em>Reference</em></strong></p>
