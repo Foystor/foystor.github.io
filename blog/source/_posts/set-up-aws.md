@@ -3,7 +3,7 @@ title: Set up AWS EC2 Parse Server in Android
 tags:
   - Android
   - AWS
-  - Parse Server
+  - Parse
 categories:
   - Coding
     - Project
