@@ -28,25 +28,25 @@ To solve this problem, we have to:
 1. **Get to where the theme directory is, and remove the .git folder within it**
 
 {% codeblock line_number:false %}
-rm -rf .git
+$ rm -rf .git
 {% endcodeblock %}
 
 We can check if it's removed successfully by listing out all the files within it:
 
 {% codeblock line_number:false %}
-ls -a
+$ ls -a
 {% endcodeblock %}
 
 2. **Remove cached files in root directory of our hexo project**
 
 {% codeblock line_number:false %}
-git rm -r --cached .
+$ git rm -r --cached .
 {% endcodeblock %}
 
 3. **Add and commit all files again**
 
 {% codeblock line_number:false %}
-git commit -am 'commit message'
+$ git commit -am 'commit message'
 {% endcodeblock %}
 
 <br/><br/><br/><br/>

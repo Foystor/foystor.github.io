@@ -51,15 +51,15 @@ Remove the ".txt" behind to keep it as a **.pem** file. This .pem file is our p
 
 Then open up the terminal and get to where the file is. In my case it's on the desktop:
 
-```
+{% codeblock line_number:false %}
 $ cd Desktop
-```
+{% endcodeblock %}
 
-2.  **Change the permissions of the .pem file so only the root user can read it**
+1.  **Change the permissions of the .pem file so only the root user can read it**
 
-```
+{% codeblock line_number:false %}
 $ chmod 400 instagramandroid.pem
-```
+{% endcodeblock %}
 
 3.  **Connect to your instance using its Public DNS**
 
@@ -67,9 +67,9 @@ In this step, simply copying the command above might get errors.
 
 You should verify that you are connecting with the [appropriate user name for your AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#TroubleshootingInstancesConnectingPuTTY). In my case:
 
-```
+{% codeblock line_number:false %}
 $ ssh -i "instagramandroid.pem" bitnami@ec2-3-14-27-1.us-east-2.compute.amazonaws.com
-```
+{% endcodeblock %}
 
 If you see something on your terminal screen like that:
 
@@ -87,15 +87,15 @@ That means you've successfully connected to your instance.
 
 Once you get to the screen, we need to move into where the parse code is, to do some setup.
 
-```
+{% codeblock line_number:false %}
 $ cd /opt/bitnami/parse
-```
+{% endcodeblock %}
 
 Next, we have a file that we need to edit:
 
-```
+{% codeblock line_number:false %}
 $ vi config.json
-```
+{% endcodeblock %}
 
 Inside the file, you can see the information of the server:
 
@@ -128,9 +128,9 @@ You should be able to visit the Parse Dashboard by surfing to your server public
 
 Get the user name and password in the terminal:
 
-```
+{% codeblock line_number:false %}
 $ cat bitnami_credentials
-```
+{% endcodeblock %}
 
 <figure>
   <img src=dashboard.png>
@@ -169,13 +169,13 @@ All we have to do is adding the publicServerURL parameter to the server.
 
 1. **Open the config.json file**
 
-```
+{% codeblock line_number:false %}
 $ cd /opt/bitnami/parse
-```
+{% endcodeblock %}
 
-```
+{% codeblock line_number:false %}
 $ vi config.json
-```
+{% endcodeblock %}
 
 2. **Add a new line below the serverURL parameter**
 
@@ -185,9 +185,10 @@ $ vi config.json
 
 3. **Save it and restart Parse running**
 
-```
+
+{% codeblock line_number:false %}
 $ sudo /opt/bitnami/ctlscript.sh restart parse
-```
+{% endcodeblock %}
 
 Now we can refresh the Parse Dashboard page, and get the photo successfully.
 
