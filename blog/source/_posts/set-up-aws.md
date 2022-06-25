@@ -12,7 +12,7 @@ date: 2022-03-15 18:09:32
 
 I've learned Android along with [The Complete Android Oreo Developer Course](https://www.udemy.com/course/the-complete-android-oreo-developer-course/).
 
-When I tried to finish the coursework in the Instagram Clone chapter, I was stuck in failing to set up the AWS EC2 Parse Server.
+When I tried to complete the coursework in the Instagram Clone chapter, I was stuck in failing to set up the AWS EC2 Parse Server.
 
 After googling many times, I finally figured it out and got access to the Parse Dashboard!🥳
 
@@ -21,20 +21,20 @@ If you also have trouble setting up the Parse Server, just go ahead and see if m
 
 * * *
 
-## Connect to your instance using SSH client
+## Connect to the instance using SSH client
 
-In Amazon Dashboard choose "Instances" from the left sidebar, and then select the instance you would like to connect to.
+In Amazon Dashboard choose "Instances" from the left sidebar, and then select the instance we would like to connect to.
 
 <figure>
   <img src=connect.png>
-  <figcaption>select an instance and click the Connect button</figcaption>
+  <figcaption>Select an instance and click the Connect button</figcaption>
 </figure>
 
 <br/>
 
 <figure>
   <img src=ssh-client.png>
-  <figcaption>click on the SSH client tab</figcaption>
+  <figcaption>Click on the SSH client tab</figcaption>
 </figure>
 
 <br/>
@@ -61,17 +61,17 @@ $ cd Desktop
 $ chmod 400 instagramandroid.pem
 {% endcodeblock %}
 
-3.  **Connect to your instance using its Public DNS**
+3.  **Connect to the instance using its Public DNS**
 
 In this step, simply copying the command above might get errors.
 
-You should verify that you are connecting with the [appropriate user name for your AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#TroubleshootingInstancesConnectingPuTTY). In my case:
+We should verify that we are connecting with the [appropriate user name for our AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#TroubleshootingInstancesConnectingPuTTY). In my case:
 
 {% codeblock line_number:false %}
 $ ssh -i "instagramandroid.pem" bitnami@ec2-3-14-27-1.us-east-2.compute.amazonaws.com
 {% endcodeblock %}
 
-If you see something on your terminal screen like that:
+If we see something on our terminal screen like that:
 
 <figure>
   <img src=success-connect.png>
@@ -79,13 +79,13 @@ If you see something on your terminal screen like that:
 
 <br/>
 
-That means you've successfully connected to your instance.
+That means we've successfully connected to our instance.
 
 * * *
 
 ## Do some setup
 
-Once you get to the screen, we need to move into where the parse code is, to do some setup.
+Once we get to the screen, we need to move into where the parse code is, to do some setup.
 
 {% codeblock line_number:false %}
 $ cd /opt/bitnami/parse
@@ -97,7 +97,7 @@ Next, we have a file that we need to edit:
 $ vi config.json
 {% endcodeblock %}
 
-Inside the file, you can see the information of the server:
+Inside the file, we can see the information of the server:
 
 <figure>
   <img src=config.png>
@@ -105,13 +105,13 @@ Inside the file, you can see the information of the server:
 
 <br/>
 
-You can paste them to initialize the Parse Server in your android application.
+We can paste the information required to initialize the Parse Server in our android application.
 
 * * *
 
 ## Connect to the Parse Dashboard
 
-You should be able to visit the Parse Dashboard by surfing to your server public IP address (that you can get from the AWS console) in your browser.
+We should be able to visit the Parse Dashboard by surfing to our server public IP address (that we can get from the AWS console) in our browser.
 
 <figure>
   <img src=url.png>
@@ -134,7 +134,7 @@ $ cat bitnami_credentials
 
 <figure>
   <img src=dashboard.png>
-  <figcaption>log in successfully</figcaption>
+  <figcaption>Log in successfully</figcaption>
 </figure>
 
 * * *

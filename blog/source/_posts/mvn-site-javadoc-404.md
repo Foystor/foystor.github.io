@@ -11,9 +11,9 @@ date: 2022-05-02 21:04:57
 
 ## Problem
 
-I built a project using Maven Quickstart Archetype.
+I've built a project using Maven Quickstart Archetype.
 
-Then I followed the usage guide of the Apache Maven Javadoc Plugin, and expected to have a Javadoc included in my project documentation.
+I followed the usage guide of the Apache Maven Javadoc Plugin, and expected to have a Javadoc included in my project documentation.
 
 <figure>
   <img src=usage.png>
