@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Intellij Cannot Resolve Symbols In Spring Starter Project</title>
+      <link href="/2022/07/02/cannot-resolve-symbol/"/>
+      <url>/2022/07/02/cannot-resolve-symbol/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>I downloaded a Spring starter project from <a href="https://start.spring.io/">Spring Initializr</a>, but when I opened the project in Intellij, I got <strong>“cannot reslove symbol”</strong> errors:</p><figure>  <img src=error.png></figure><h2 id="Try-to-fix"><a href="#Try-to-fix" class="headerlink" title="Try to fix"></a>Try to fix</h2><p>I googled and looked through StackOverflow, and I tried the solutions below:</p><ol><li>Invalidate caches and restart</li><li><code>mvn clean install</code></li><li>Delete the <code>.m2</code> directory, and then <code>mvn clean install</code></li><li><code>mvn clean install -U</code></li></ol><p><strong>But nothing changes.</strong></p><p>I tried to download more Spring boot starter projects for experiment. Then when I first opened one of those projects, I got the error below:</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">org.codehaus.plexus.component.repository.exception.ComponentLookupException: com.google.inject.ProvisionException: Unable to provision, see the following errors:</span><br><span class="line"></span><br><span class="line">1) Error injecting constructor, java.lang.NoSuchMethodError: org.apache.maven.model.validation.DefaultModelValidator: method &lt;init&gt;()V not found</span><br><span class="line">  at org.jetbrains.idea.maven.server.embedder.CustomModelValidator.&lt;init&gt;(Unknown Source)</span><br><span class="line">  while locating org.jetbrains.idea.maven.server.embedder.CustomModelValidator</span><br><span class="line">  at ClassRealm[maven.ext, parent: ClassRealm[plexus.core, parent: null]] (via modules: org.eclipse.sisu.wire.WireModule -&gt; org.eclipse.sisu.plexus.PlexusBindingModule)</span><br><span class="line">  while locating org.apache.maven.model.validation.ModelValidator annotated with @com.google.inject.name.Named(value=ide)</span><br><span class="line"></span><br><span class="line">1 error</span><br><span class="line">      role: org.apache.maven.model.validation.ModelValidator</span><br><span class="line">  roleHint: ide</span><br></pre></td></tr></table></figure><p>I searched for solutions to this error. Then I saw someone also got this error in the same version (<strong>2021.3.2</strong>) of <code>Intellij</code> as mine, and the problem was solved by downgrading the version of <code>maven</code> from <strong>3.8.5</strong> to <strong>3.6.3</strong>.</p><h2 id="What’s-wrong"><a href="#What’s-wrong" class="headerlink" title="What’s wrong"></a>What’s wrong</h2><p>So FINALLY, the <strong>“cannot reslove symbol”</strong> problem was due to an incompatibility between the <code>Maven</code> and <code>IntelliJ</code> versions.</p><p><strong>The release of the Maven version should be earlier than the one of Intellij.</strong></p><h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>I was using <code>Maven</code> <strong>3.8.5</strong>, so I upgraded my <code>Intellij</code> from <strong>2021.3.2</strong> to <strong>2022.1.3</strong> (Community Edition), then everything works fine.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Coding - Project </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> Spring Boot </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>&quot;git add .&quot; failed for hexo project due to the theme submodule</title>
       <link href="/2022/06/09/hexo-theme-submodule-problem/"/>
       <url>/2022/06/09/hexo-theme-submodule-problem/</url>
