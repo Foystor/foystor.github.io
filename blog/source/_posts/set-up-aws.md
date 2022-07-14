@@ -10,44 +10,36 @@ categories:
 date: 2022-03-15 18:09:32
 ---
 
-I've learned Android along with [The Complete Android Oreo Developer Course](https://www.udemy.com/course/the-complete-android-oreo-developer-course/).
+I learned Android along with [The Complete Android Oreo Developer Course](https://www.udemy.com/course/the-complete-android-oreo-developer-course/) and was stuck in the Instagram Clone chapter when I tried to set up the AWS EC2 Parse Server.
 
-When I tried to complete the coursework in the Instagram Clone chapter, I was stuck in failing to set up the AWS EC2 Parse Server.
+After googling many times, I finally figured it out and got access to the Parse Dashboard!
 
-After googling many times, I finally figured it out and got access to the Parse Dashboard!🥳
-
-If you also have trouble setting up the Parse Server, just go ahead and see if my solutions would give any help.
+If you also have trouble setting up the Parse Server, just go ahead and see if my solutions would inspire you.
 <!-- more -->
-
-* * *
 
 ## Connect to the instance using SSH client
 
-In Amazon Dashboard choose "Instances" from the left sidebar, and then select the instance we would like to connect to.
+In Amazon Dashboard choose ```Instances``` from the left sidebar, and then select the instance we would like to connect to.
 
 <figure>
   <img src=connect.png>
   <figcaption>Select an instance and click the Connect button</figcaption>
 </figure>
 
-<br/>
-
 <figure>
   <img src=ssh-client.png>
   <figcaption>Click on the SSH client tab</figcaption>
 </figure>
 
-<br/>
+We can just follow the instructions above, but there might be some unexpected problems.
 
-We can just go and follow the instructions above, but there might be some unexpected problems.
-
-<br/>
+So refer to the steps below:
 
 1.  **Open the terminal and locate the private key file**
 
-Check the **.pem.txt** file we've just downloaded when creating a new key pair.
+Check the ```.pem.txt``` file we've just downloaded when creating a new key pair.
 
-Remove the ".txt" behind to keep it as a **.pem** file. This .pem file is our private key file.
+Remove the **".txt"** behind to keep it as a ```.pem``` file. This ```.pem``` file is our private key file.
 
 Then open up the terminal and get to where the file is. In my case it's on the desktop:
 
@@ -55,7 +47,7 @@ Then open up the terminal and get to where the file is. In my case it's on the d
 $ cd Desktop
 {% endcodeblock %}
 
-1.  **Change the permissions of the .pem file so only the root user can read it**
+1.  **Change the permissions of the ```.pem``` file so only the root user can read it**
 
 {% codeblock line_number:false %}
 $ chmod 400 instagramandroid.pem
@@ -65,27 +57,25 @@ $ chmod 400 instagramandroid.pem
 
 In this step, simply copying the command above might get errors.
 
-We should verify that we are connecting with the [appropriate user name for our AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#TroubleshootingInstancesConnectingPuTTY). In my case:
+We should verify that we are connecting with the [appropriate user name for our AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#TroubleshootingInstancesConnectingPuTTY).
+
+In my case:
 
 {% codeblock line_number:false %}
 $ ssh -i "instagramandroid.pem" bitnami@ec2-3-14-27-1.us-east-2.compute.amazonaws.com
 {% endcodeblock %}
 
-If we see something on our terminal screen like that:
+If we see something on our terminal screen like this:
 
 <figure>
   <img src=success-connect.png>
 </figure>
 
-<br/>
-
 That means we've successfully connected to our instance.
-
-* * *
 
 ## Do some setup
 
-Once we get to the screen, we need to move into where the parse code is, to do some setup.
+Once we get to that screen, we need to move into where the parse code is, to do some setup:
 
 {% codeblock line_number:false %}
 $ cd /opt/bitnami/parse
@@ -103,28 +93,20 @@ Inside the file, we can see the information of the server:
   <img src=config.png>
 </figure>
 
-<br/>
-
 We can paste the information required to initialize the Parse Server in our android application.
-
-* * *
 
 ## Connect to the Parse Dashboard
 
-We should be able to visit the Parse Dashboard by surfing to our server public IP address (that we can get from the AWS console) in our browser.
+We should be able to visit the Parse Dashboard by surfing to our server public IP address (which we can get from the AWS console) in our browser.
 
 <figure>
   <img src=url.png>
 </figure>
 
-<br/>
-
 <figure>
   <img src=login.png>
   <figcaption>login page for the Parse Server</figcaption>
 </figure>
-
-<br/>
 
 Get the user name and password in the terminal:
 
@@ -137,8 +119,6 @@ $ cat bitnami_credentials
   <figcaption>Log in successfully</figcaption>
 </figure>
 
-* * *
-
 ## Configure publicServerURL
 
 Let's say we upload a photo to the parse server.
@@ -148,8 +128,6 @@ When we click on the image link, it opens up a url using the localhost IP again.
 <figure>
   <img src=link.png>
 </figure>
-
-<br/>
 
 <figure>
   <img src=localhost.png>
@@ -161,13 +139,13 @@ That's a promblem. Because it means we can not get access to this photo in our p
 When using files on Parse, you will need to use the publicServerURL option in your Parse Server config. This is the URL that files will be accessed from, so it should be a URL that resolves to your Parse Server. Make sure to include your mount point in this URL.
 {% endblockquote %}
 
-The publicServerURL is explicitely required for those cases. Parse server injects the publicServerURL for all our files at runtime.
+The ```publicServerURL``` is explicitely required for those cases. Parse server injects the ```publicServerURL``` for all our files at runtime.
 
-Every file URL is replaced at runtime, with the full URL. If we set the publicServerURL, this will be set in all the responses.
+Every file URL is replaced at runtime, with the full URL. If we set the ```publicServerURL```, this will be set in all the responses.
 
-All we have to do is adding the publicServerURL parameter to the server.
+All we have to do is adding the ```publicServerURL``` parameter to the server.
 
-1. **Open the config.json file**
+1. **Open the ```config.json``` file**
 
 {% codeblock line_number:false %}
 $ cd /opt/bitnami/parse
@@ -177,7 +155,7 @@ $ cd /opt/bitnami/parse
 $ vi config.json
 {% endcodeblock %}
 
-2. **Add a new line below the serverURL parameter**
+2. **Add a new line below the ```serverURL``` parameter**
 
 {% codeblock line_number:false %}
 "publicServerURL": "http://IP/parse"
@@ -190,11 +168,11 @@ $ vi config.json
 $ sudo /opt/bitnami/ctlscript.sh restart parse
 {% endcodeblock %}
 
-Now we can refresh the Parse Dashboard page, and get the photo successfully.
+Now we can refresh the Parse Dashboard page, and can get to the right URL to download photos successfully.
 
 <br/><br/><br/><br/>
 
-**_Reference_**
+**_References_**
 
 [_Unable to find /opt/bitnami/apps/parse/htdocs/server.js_](https://community.bitnami.com/t/unable-to-find-opt-bitnami-apps-parse-htdocs-server-js/78200)
 

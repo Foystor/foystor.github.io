@@ -67,8 +67,8 @@ date: 2022-03-18 23:56:01
 #### <span style="color:red">\***Adapter vs Decorator**</span>
 
 *   These patterns both "wrap" another object, called the **delegate**.
-*   An **Adapter** returns a **different interface** than the delegate.
-*   A **Decorator** returns the **same interface**, but with **added functionality** or responsibilities.
+*   An ```Adapter``` returns a **different interface** than the delegate.
+*   A ```Decorator``` returns the **same interface**, but with **added functionality** or responsibilities.
 
 * * *
 

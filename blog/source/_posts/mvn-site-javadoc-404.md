@@ -1,5 +1,5 @@
 ---
-title: "\"mvn site\" with maven-javadoc-plugin can't access to Javadoc (404)"
+title: Execute "mvn site" with maven-javadoc-plugin can't access to Javadoc
 tags:
   - Java
   - Maven
@@ -11,9 +11,9 @@ date: 2022-05-02 21:04:57
 
 ## Problem
 
-I've built a project using Maven Quickstart Archetype.
+I've built a project using ```Maven Quickstart Archetype```.
 
-I followed the usage guide of the Apache Maven Javadoc Plugin, and expected to have a Javadoc included in my project documentation.
+I followed the usage guide of the [Apache Maven Javadoc Plugin](https://maven.apache.org/plugins/maven-javadoc-plugin/usage.html), and expected to have a Javadoc included in my project documentation.
 
 <figure>
   <img src=usage.png>
@@ -29,17 +29,15 @@ I followed the usage guide of the Apache Maven Javadoc Plugin, and expected to h
 
 <br/>
 
-However, I got a 404 on my Javadoc page.
+However, I got a **404** on my Javadoc page.
 
 <figure>
   <img src=404.png>
 </figure>
 
-* * *
-
 ## Solution
 
-Change the version of maven-javadoc-plugin to **3.2.0** to solve this problem.
+Change the version of ```maven-javadoc-plugin``` to **3.2.0** to solve this problem.
 
 <figure>
   <img src=edit.png>
@@ -47,7 +45,7 @@ Change the version of maven-javadoc-plugin to **3.2.0** to solve this problem.
 
 <br/>
 
-Compared to the target directory generated when executing "mvn site" on the **3.4.0** version, the one generated on the **3.2.0** version added files as following:
+Compared to the ```target``` directory generated when executing ```mvn site``` on the **3.4.0** version, the one generated on the **3.2.0** version added directory and file below:
 
 <figure>
   <img src=compare.png>

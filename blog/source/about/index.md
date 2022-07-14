@@ -12,16 +12,16 @@ Web Developer
 
 Hi there!
 
-I'm Foystor. Welcome to my blog!
-
-I've worked as a frontend web developer since 2021.
+I'm Foystor. Welcome to my blog.
 
 As a developer, I've experienced with:
 
 *   HTML/CSS, JavaScript, Vue.js, Node.js.
+*   Java, Maven, Spring Boot, MyBatis, SQL.
+*   Spring MVC, Thymeleaf, JUnit, Selenium.
+*   Android, Kotlin, AWS, BLE app.
 *   WeChat Mini Program, mpvue.
-*   Java, Maven, Android, AWS, BLE app.
-*   A little knowledge with C# and ASP.NET Core.
+*   A little knowledge of C# and ASP.NET Core.
 
 In addition to technical sharing, I'd like to write somthing interests me here.
 

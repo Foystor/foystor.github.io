@@ -1,5 +1,5 @@
 ---
-title: "\"git add .\" failed for hexo project due to the theme submodule"
+title: Fail to execute "git add" on the Hexo project due to the theme submodule
 date: 2022-06-09 02:25:24
 tags:
   - Hexo
@@ -9,23 +9,25 @@ categories:
     - Project
 ---
 
-I wanted to backup the source files of my blog, but I failed to "git add ." my hexo project.
+## Problem
 
-It said:
+I failed to ```git add .``` the source files of my Hexo blog project, and the error said:
 
 {% codeblock line_number:false %}
 You've added another git repository inside your current repository.
 {% endcodeblock %}
 
+## What's wrong
+
 That was because inside this repository, I had cloned the theme files from another github repository.
 
-So git identifies the theme as a submodule.
+So ```Git``` identifies the theme as a submodule.
 
-* * *
+## Solution
 
 To solve this problem, we have to:
 
-1. **Get to where the theme directory is, and remove the .git folder within it**
+1. **Get to where the theme directory is, and remove the ```.git``` folder within it**
 
 {% codeblock line_number:false %}
 $ rm -rf .git
@@ -51,7 +53,7 @@ $ git commit -am 'commit message'
 
 <br/><br/><br/><br/>
 
-**_Reference_**
+**_References_**
 
 [_Git is not tracking Hexo theme file_](https://stackoverflow.com/questions/53902804/git-is-not-tracking-hexo-theme-file)
 

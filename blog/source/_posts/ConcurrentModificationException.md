@@ -2,18 +2,21 @@
 title: Exception in thread "AWT-EventQueue-0" java.util.ConcurrentModificationException
 date: 2022-06-02 20:01:00
 tags:
-  - Exception
   - Java
 categories:
   - Coding
     - Project
 ---
 
-When I used foreach-loop and lambda to apply a specific function to each element in a set data structure, the program threw the exception below:
+## Problem
+
+When I used ```foreach-loop``` and ```lambda``` to apply a specific function to each element in a set data structure, the program threw the exception below:
 
 {% codeblock line_number:false %}
 Exception in thread "AWT-EventQueue-0" java.util.ConcurrentModificationException
 {% endcodeblock %}
+
+## What's wrong
 
 That was because:
 
@@ -21,34 +24,34 @@ That was because:
 
 **We should avoid modifying elements in a set while iterating that set.**
 
-* * *
+## Solution
 
-There are **2** simple ways to fix that problem.
+There are two simple ways to fix that problem:
 
-## Use the normal for loop
+1. **Use the normal ```for loop```**
 
-With the for (int i...) loop, we are not iterating the set, so we can modify the elements inside.
+With the ```for (int i...) loop```, we are not iterating the set, so we can modify the elements inside.
 
-## Synchronize the operations properly
+2. **Synchronize the operations properly**
 
-We can use a concurrent set whose iterators won't give the exception, such as ConcurrentSkipListSet.
+We can use a concurrent set whose iterators won't give the exception, such as ```ConcurrentSkipListSet```.
 
-In my case, I can change my codes:
+In my case, I can change my code:
 
-```
+```java
 getSensors().forEach(sensor -> changeSensorActivationStatus(sensor,false));
 ```
 
-to the codes below:
+to the code below:
 
-```
+```java
 ConcurrentSkipListSet<Sensor> sensors = new ConcurrentSkipListSet<>(getSensors());
 sensors.forEach(sensor -> changeSensorActivationStatus(sensor,false));
 ```
 
 <br/><br/><br/><br/>
 
-**_Reference_**
+**_References_**
 
 _[Java ArrayList and Exception in thread "AWT-EventQueue-0" java.util.ConcurrentModificationException](https://stackoverflow.com/questions/17067626/java-arraylist-and-exception-in-thread-awt-eventqueue-0-java-util-concurrentm)_
 
