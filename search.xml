@@ -4,6 +4,64 @@
   
     
     <entry>
+      <title>Using @ModelAttribute annotation in Spring MVC</title>
+      <link href="/2022/07/09/ModelAttribute-annotation-in-Spring-MVC/"/>
+      <url>/2022/07/09/ModelAttribute-annotation-in-Spring-MVC/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>I developed a chat application with <code>Spring MVC</code>, and here are the codes in the <code>ChatController</code> Class and the <code>chat.html</code> page:</p><figure>  <img src=controller.png>  <figcaption>ChatController</figcaption></figure><figure>  <img src=html.png>  <figcaption>chat.html</figcaption></figure><h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>Notice that I used the <code>newChatForm</code> identifier in <code>th:object</code> present in the <code>chat.html</code> page to name the <code>ChatForm</code> parameter both in the <code>getChatPage</code> and <code>addChat</code> method.</p><p>But when I removed the <code>@ModelAttribute(&quot;newChatForm&quot;)</code> in one of those methods, I got the error below:</p><figure>  <img src=error.png></figure><h2 id="What’s-wrong"><a href="#What’s-wrong" class="headerlink" title="What’s wrong"></a>What’s wrong</h2><p>Since I included <code>th:object</code> in the <code>chat.html</code> page, and so for the mapping to be done, a <code>ChatForm</code> object needs to be included in the <code>Spring Container</code> to be used by <code>Spring MVC</code> to map the form data.<br><br/><code>Spring MVC</code> will check in the <code>Spring Container</code> if there is any instance with the name similar to <code>th:object</code>. If there is one it ends up using that instance in the mapping.</p><p>But when I only put <code>ChatForm newChatForm</code> in the method parameter, I am telling <code>Spring</code> that this parameter must be instantiated (with the default name <strong><code>chatForm</code></strong>, which is the camelCase pattern of <code>ChatForm</code>), because it will be used in the method as well as the <code>Model</code>. The <code>ChatForm</code> is only included in the <code>Spring Container</code> not being included by the <code>Model</code> in the <code>chat.html</code> page.</p><p>Since the default name <code>chatForm</code> is different from the <code>newChatForm</code> identifier in <code>th:object</code> present in the <code>chat.html</code>, <code>Spring MVC</code> can’t find any instance to map the form data, which causes the error I received.</p><p>However, when I use <code>@ModelAttribute(&quot;newChatForm&quot;)</code>, I am indicating to <code>Spring</code> that besides instantiating the <code>ChatForm</code>, this <code>ChatForm</code> must be included in the page through the <code>newChatForm</code> identifier, since this inclusion is made through the <code>Model</code>. So no error is thrown.</p><p><strong>So, the inclusion of the <code>@ModelAttribute</code> depends on the identifiers being used</strong>, if both are equal, its inclusion is not necessary, otherwise, we need it so that a mapping error does not occur.</p><h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ol><li><strong>Use <code>chatForm</code> identifier both in <code>chat.html</code> and in the <code>ChatController</code> method parameter</strong></li></ol><figure class="highlight html"><figcaption><span>chat.html</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">th:action</span>=<span class="string">&quot;@&#123;&#x27;/chat&#x27;&#125;&quot;</span> <span class="attr">th:object</span>=<span class="string">&quot;$&#123;chatForm&#125;&quot;</span> <span class="attr">action</span>=<span class="string">&quot;#&quot;</span> <span class="attr">method</span>=<span class="string">&quot;POST&quot;</span>&gt;</span></span><br><span class="line">  // original code</span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure><figure class="highlight java"><figcaption><span>ChatController.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">getChatPage</span><span class="params">(ChatForm chatForm, Model model)</span> &#123;</span><br><span class="line">    <span class="comment">// original code</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@PostMapping</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">addChat</span><span class="params">(ChatForm chatForm, Model model)</span> &#123;</span><br><span class="line">    <span class="comment">// change variable name from &quot;newChatForm&quot; to &quot;chatForm&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>This way <code>Spring MVC</code> directly uses the <code>ChatForm</code> instance in the <code>Spring Container</code> for mapping, so we don’t need to use <code>@ModelAttribute</code>.</p><p>However, this approach requires that other developers have some knowledge of how <code>Spring</code> works under the hood, otherwise they will probably delete the <code>ChatForm</code> thinking that this parameter is not doing anything.</p><ol start="2"><li><strong>Create the <code>getChatForm</code> method to return the instance</strong></li></ol><p>Every time the <code>&quot;/chat&quot;</code> endpoint is triggered, <code>Spring</code> will automatically assign a <code>ChatForm</code> instance to the <code>chat.html</code> page.</p><p>For improving the readability of the code by showing more clearly the process of assigning the instance by <code>Spring</code>, </p><p>We can create the <code>getChatForm</code> method which will be responsible for including the object in the <code>Spring Container</code> and which can be used by <code>Spring MVC</code> for mapping:</p><figure class="highlight java"><figcaption><span>ChatController.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ModelAttribute(&quot;newChatForm&quot;)</span></span><br><span class="line"><span class="keyword">public</span> ChatForm getChatForm &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ChatForm</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>This way we can remove the <code>@ModelAttribute(&quot;newChatForm&quot;)</code> from both methods and the <code>ChatForm</code> from the <code>getChatPage</code> method:</p><figure class="highlight java"><figcaption><span>ChatController.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">getChatPage</span><span class="params">(Model model)</span> &#123;</span><br><span class="line">    <span class="comment">// original code</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@PostMapping</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">addChat</span><span class="params">(ChatForm newChatForm, Model model)</span> &#123;</span><br><span class="line">    <span class="comment">// original code</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><br/><br/><br/><br/></p><p><strong><em>References</em></strong></p><p><a href="https://stackoverflow.com/questions/3502749/difference-between-using-and-not-using-modelattribute-in-method-parameter"><em>Difference between using and not using @modelAttribute in method parameter</em></a></p><p><a href="https://stackoverflow.com/questions/4700804/what-is-the-meaning-of-modelattribute-annotation-at-method-argument-level"><em>What is the meaning of @ModelAttribute annotation at method argument level?</em></a></p><p><a href="http://opensourceforgeeks.blogspot.com/2016/01/using-modelattribute-annotation-in.html"><em>Using @ModelAttribute annotation in Spring MVC</em></a></p><p><a href="https://knowledge.udacity.com/questions/868688"><em>Remove @ModelAttribute(“newChatForm”) and get error</em></a></p><p><a href="https://knowledge.udacity.com/questions/731386"><em>Why we should add @ModelAttribute in GET method?</em></a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Coding - Project </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> Spring Boot </tag>
+            
+            <tag> Spring MVC </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Clean the text of the form after submission</title>
+      <link href="/2022/07/06/clean-text-of-form/"/>
+      <url>/2022/07/06/clean-text-of-form/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>I developed a chat application with <code>Spring MVC</code>, where I can submit messages along with my username, and those messages will be visible to any user that navigates to the <code>/chat</code> URL.</p><p>But when I submit my message, the message is not removed from the Message Text input so I have to remove it manually.</p><figure>  <img src=remain.png></figure><p>And here is the code in <code>ChatController</code> Class:</p><figure>  <img src=controller.png>  <figcaption>ChatController</figcaption></figure><h2 id="What’s-wrong"><a href="#What’s-wrong" class="headerlink" title="What’s wrong"></a>What’s wrong</h2><p>when we initialize our application, <code>Spring</code> will scan our project and instantiate only one <code>ChatForm</code> object and it will include it in the <code>Application Context</code>, so every time we access the <code>chat.html</code> page, the same instance of the <code>ChatForm</code> will be passed and will be used to transport the form data present in the <code>chat.html</code> page to the <code>addChat</code> method.</p><p>This reuse of the same instance of the <code>ChatForm</code> is done precisely so that unnecessary instances of it are created and thus end up increasing the memory consumption of our application and affect its performance.</p><h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Add controller code that sets the Message Text of the <code>ChatForm</code> object to <code>&quot;&quot;</code>;</p><figure>  <img src=clean-text.png></figure><p><br/><br/><br/><br/></p><p><strong><em>References</em></strong></p><p><a href="https://knowledge.udacity.com/questions/625850"><em>Why do we need chatForm.setMessageText(“”) in the controller</em></a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Coding - Project </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> Spring Boot </tag>
+            
+            <tag> Spring MVC </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Intellij Cannot Resolve Symbols In Spring Starter Project</title>
       <link href="/2022/07/02/cannot-resolve-symbol/"/>
       <url>/2022/07/02/cannot-resolve-symbol/</url>
