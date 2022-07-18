@@ -3,11 +3,16 @@ title: DaoKoi|FonBelle Sweet On-Screen Couple
 date: 2022-04-26 22:46:00
 tags:
   - CP
-  - DaoKoi|FonBelle
 categories:
-  - Yuri
+  - Girls Love
     - Material Collection
 ---
+
+<figure>
+  <img src=daokoi.png>
+</figure>
+
+<br/><br/>
 
 ## To Recommend And Advertise
 
