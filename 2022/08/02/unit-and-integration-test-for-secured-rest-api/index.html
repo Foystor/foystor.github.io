@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="BackgroundI’ve secured my Dog REST API using Basic Authentication with Spring Security. EncoderConfig.java1234567@Configurationpublic class EncoderConfig &amp;#123;    @Bean    PasswordEncoder passwordEnc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unit Test and Integration Test for secured REST API">
+<meta property="og:url" content="https://foystor.github.io/2022/08/02/unit-and-integration-test-for-secured-rest-api/index.html">
+<meta property="og:site_name" content="Foystor&#39;s Blog">
+<meta property="og:description" content="BackgroundI’ve secured my Dog REST API using Basic Authentication with Spring Security. EncoderConfig.java1234567@Configurationpublic class EncoderConfig &amp;#123;    @Bean    PasswordEncoder passwordEnc">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-08-01T17:02:12.000Z">
+<meta property="article:modified_time" content="2023-04-29T10:06:05.180Z">
+<meta property="article:author" content="Foystor">
+<meta property="article:tag" content="Spring Boot">
+<meta property="article:tag" content="Testing">
+<meta property="article:tag" content="Spring Security">
+<meta property="article:tag" content="REST">
+<meta property="article:tag" content="API">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Unit Test and Integration Test for secured REST API</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+    <meta name="google-site-verification" content="KO7vvBU3ttqbeRJV6Ki9PydxOBnwaOQYzyAX60YqObE" />
+    <meta name="google-site-verification" content="zLOg-wm0CWmnn7HIsEiEjiz2B_93RmWxLAudRxe2DEk" />
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Foystor">Projects</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2022/08/03/get-dquote-when-git-commit/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2022/08/01/swagger-ui-not-rendering/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://foystor.github.io/2022/08/02/unit-and-integration-test-for-secured-rest-api/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://foystor.github.io/2022/08/02/unit-and-integration-test-for-secured-rest-api/&text=Unit Test and Integration Test for secured REST API"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://foystor.github.io/2022/08/02/unit-and-integration-test-for-secured-rest-api/&title=Unit Test and Integration Test for secured REST API"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://foystor.github.io/2022/08/02/unit-and-integration-test-for-secured-rest-api/&is_video=false&description=Unit Test and Integration Test for secured REST API"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unit Test and Integration Test for secured REST API&body=Check out this article: https://foystor.github.io/2022/08/02/unit-and-integration-test-for-secured-rest-api/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://foystor.github.io/2022/08/02/unit-and-integration-test-for-secured-rest-api/&title=Unit Test and Integration Test for secured REST API"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://foystor.github.io/2022/08/02/unit-and-integration-test-for-secured-rest-api/&title=Unit Test and Integration Test for secured REST API"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://foystor.github.io/2022/08/02/unit-and-integration-test-for-secured-rest-api/&title=Unit Test and Integration Test for secured REST API"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://foystor.github.io/2022/08/02/unit-and-integration-test-for-secured-rest-api/&title=Unit Test and Integration Test for secured REST API"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://foystor.github.io/2022/08/02/unit-and-integration-test-for-secured-rest-api/&name=Unit Test and Integration Test for secured REST API&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://foystor.github.io/2022/08/02/unit-and-integration-test-for-secured-rest-api/&t=Unit Test and Integration Test for secured REST API"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Background"><span class="toc-number">1.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem"><span class="toc-number">2.</span> <span class="toc-text">Problem</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#What%E2%80%99s-wrong"><span class="toc-number">3.</span> <span class="toc-text">What’s wrong</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution"><span class="toc-number">4.</span> <span class="toc-text">Solution</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#How-do-I-put-in-the-username-and-password"><span class="toc-number">4.1.</span> <span class="toc-text">How do I put in the username and password</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Error-Failed-to-load-ApplicationContext-when-running-unit-test"><span class="toc-number">4.2.</span> <span class="toc-text">Error Failed to load ApplicationContext when running unit test</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Unit Test and Integration Test for secured REST API
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Foystor</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-08-01T17:02:12.000Z" itemprop="datePublished">2022-08-02</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Coding-Bugfix/">Coding - Bugfix</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/API/" rel="tag">API</a>, <a class="tag-link-link" href="/tags/REST/" rel="tag">REST</a>, <a class="tag-link-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a>, <a class="tag-link-link" href="/tags/Spring-Security/" rel="tag">Spring Security</a>, <a class="tag-link-link" href="/tags/Testing/" rel="tag">Testing</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>I’ve secured my Dog REST API using <code>Basic Authentication</code> with <code>Spring Security</code>.</p>
+<figure class="highlight java"><figcaption><span>EncoderConfig.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EncoderConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    PasswordEncoder <span class="title function_">passwordEncoder</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">BCryptPasswordEncoder</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><figcaption><span>SpringSecurityConfig.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableWebSecurity</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SpringSecurityConfig</span> <span class="keyword">extends</span> <span class="title class_">WebSecurityConfigurerAdapter</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    PasswordEncoder encoder;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        http.csrf().disable()</span><br><span class="line">                .authorizeRequests()</span><br><span class="line">                .anyRequest()</span><br><span class="line">                .authenticated()</span><br><span class="line">                .and()</span><br><span class="line">                .httpBasic();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">configureGlobal</span><span class="params">(AuthenticationManagerBuilder auth)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        auth.inMemoryAuthentication()</span><br><span class="line">                .withUser(<span class="string">&quot;admin&quot;</span>)</span><br><span class="line">                .password(encoder.encode(<span class="string">&quot;password&quot;</span>))</span><br><span class="line">                .roles(<span class="string">&quot;USER&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>Now I want to create a unit test and an integration test for my API, but I have two problems with them:</p>
+<ol>
+<li><p>How do I put in the username and password</p>
+</li>
+<li><p>I got the error below when I ran the unit test:</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java.lang.IllegalStateException: Failed to load ApplicationContext</span><br><span class="line"></span><br><span class="line">	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:132)</span><br><span class="line">	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124)</span><br><span class="line">	at org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener.postProcessFields(MockitoTestExecutionListener.java:110)</span><br><span class="line">	at org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener.injectFields(MockitoTestExecutionListener.java:94)</span><br><span class="line">	at org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener.prepareTestInstance(MockitoTestExecutionListener.java:61)</span><br><span class="line">	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:248)</span><br><span class="line">	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227)</span><br><span class="line">	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)</span><br><span class="line">	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)</span><br><span class="line">	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)</span><br><span class="line">	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246)</span><br><span class="line">	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97)</span><br><span class="line">	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)</span><br><span class="line">	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)</span><br><span class="line">	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)</span><br><span class="line">	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)</span><br><span class="line">	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)</span><br><span class="line">	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)</span><br><span class="line">	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)</span><br><span class="line">	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)</span><br><span class="line">	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)</span><br><span class="line">	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190)</span><br><span class="line">	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)</span><br><span class="line">	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)</span><br><span class="line">	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)</span><br><span class="line">	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)</span><br><span class="line">	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)</span><br><span class="line">	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:235)</span><br><span class="line">	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:54)</span><br><span class="line">Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &#x27;springSecurityConfig&#x27;: Unsatisfied dependency expressed through field &#x27;encoder&#x27;; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &#x27;org.springframework.security.crypto.password.PasswordEncoder&#x27; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: &#123;@org.springframework.beans.factory.annotation.Autowired(required=true)&#125;</span><br><span class="line">	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:659)</span><br><span class="line">	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:639)</span><br><span class="line">	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119)</span><br><span class="line">	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399)</span><br><span class="line">	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431)</span><br><span class="line">	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619)</span><br><span class="line">	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)</span><br><span class="line">	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)</span><br><span class="line">	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)</span><br><span class="line">	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)</span><br><span class="line">	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)</span><br><span class="line">	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955)</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918)</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)</span><br><span class="line">	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734)</span><br><span class="line">	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408)</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)</span><br><span class="line">	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:132)</span><br><span class="line">	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)</span><br><span class="line">	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)</span><br><span class="line">	... 28 more</span><br><span class="line">Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &#x27;org.springframework.security.crypto.password.PasswordEncoder&#x27; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: &#123;@org.springframework.beans.factory.annotation.Autowired(required=true)&#125;</span><br><span class="line">	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1801)</span><br><span class="line">	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1357)</span><br><span class="line">	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311)</span><br><span class="line">	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:656)</span><br><span class="line">	... 47 more</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="What’s-wrong"><a href="#What’s-wrong" class="headerlink" title="What’s wrong"></a>What’s wrong</h2><p>For the <strong>second</strong> problem, The error was occurring because in the unit test class I was using <code>@WebMvcTest</code> and it was only going to scan the <code>Controller</code> I’ve defined and the <code>MVC infrastructure</code></p>
+<p>So other <code>@Bean</code> that were defined outside the <code>Controller</code> and that were needed as is the case of the one that is present in the <code>PasswordEncoder</code> have to be defined manually.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="How-do-I-put-in-the-username-and-password"><a href="#How-do-I-put-in-the-username-and-password" class="headerlink" title="How do I put in the username and password"></a>How do I put in the username and password</h3><ul>
+<li><p>Unit Test</p>
+  <figure class="highlight java"><figcaption><span>SampleTestCode</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mockMvc.perform(get(<span class="string">&quot;/dogs&quot;</span>)</span><br><span class="line">		.with(user(<span class="string">&quot;admin&quot;</span>).password(<span class="string">&quot;password&quot;</span>))</span><br><span class="line">		.accept(MediaType.APPLICATION_JSON))</span><br><span class="line">	.andExpect(status().isOk());</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Integration Test</p>
+  <figure class="highlight java"><figcaption><span>SampleTestCode</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ResponseEntity&lt;List&gt; response =</span><br><span class="line">	restTemplate.withBasicAuth(<span class="string">&quot;admin&quot;</span>, <span class="string">&quot;password&quot;</span>)</span><br><span class="line">		.getForEntity(<span class="string">&quot;http://localhost:&quot;</span> + port + <span class="string">&quot;/dogs&quot;</span>, List.class);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="Error-Failed-to-load-ApplicationContext-when-running-unit-test"><a href="#Error-Failed-to-load-ApplicationContext-when-running-unit-test" class="headerlink" title="Error Failed to load ApplicationContext when running unit test"></a>Error <code>Failed to load ApplicationContext</code> when running unit test</h3><p>To add the <code>@Bean</code> referring to the <code>PasswordEncoder</code> in the unit test, follow the steps below:</p>
+<ol>
+<li><p>Create a folder called <code>config</code> within the test folder</p>
+</li>
+<li><p>Create the <code>TestConfig</code> class in the <code>config</code> folder</p>
+ <figure>
+ <img src=tree.png>
+ <figcaption>Folder Structure</figcaption>
+ </figure>
+</li>
+<li><p>Include in the <code>TestConfig</code> class an <code>@Bean</code> for <code>PasswordEncoder</code></p>
+ <figure class="highlight java"><figcaption><span>TestConfig.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@TestConfiguration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestConfig</span> &#123;</span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="keyword">public</span> PasswordEncoder <span class="title function_">passwordEncoder</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">BCryptPasswordEncoder</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Include the Class-level annotation below in the unit test:</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Import(TestConfig.class)</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><br/><br/><br/><br/></p>
+<p><strong><em>References</em></strong></p>
+<p><em><a target="_blank" rel="noopener" href="https://knowledge.udacity.com/questions/801603">How to authorize api in test</a></em></p>
+<p><em><a target="_blank" rel="noopener" href="https://knowledge.udacity.com/questions/754198">Dog Api Test: Failed to load ApplicationContext</a></em></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/Foystor">Projects</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tags</a></li>
+         
+          <li><a href="/categories/">Categories</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Background"><span class="toc-number">1.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem"><span class="toc-number">2.</span> <span class="toc-text">Problem</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#What%E2%80%99s-wrong"><span class="toc-number">3.</span> <span class="toc-text">What’s wrong</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution"><span class="toc-number">4.</span> <span class="toc-text">Solution</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#How-do-I-put-in-the-username-and-password"><span class="toc-number">4.1.</span> <span class="toc-text">How do I put in the username and password</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Error-Failed-to-load-ApplicationContext-when-running-unit-test"><span class="toc-number">4.2.</span> <span class="toc-text">Error Failed to load ApplicationContext when running unit test</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://foystor.github.io/2022/08/02/unit-and-integration-test-for-secured-rest-api/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://foystor.github.io/2022/08/02/unit-and-integration-test-for-secured-rest-api/&text=Unit Test and Integration Test for secured REST API"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://foystor.github.io/2022/08/02/unit-and-integration-test-for-secured-rest-api/&title=Unit Test and Integration Test for secured REST API"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://foystor.github.io/2022/08/02/unit-and-integration-test-for-secured-rest-api/&is_video=false&description=Unit Test and Integration Test for secured REST API"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unit Test and Integration Test for secured REST API&body=Check out this article: https://foystor.github.io/2022/08/02/unit-and-integration-test-for-secured-rest-api/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://foystor.github.io/2022/08/02/unit-and-integration-test-for-secured-rest-api/&title=Unit Test and Integration Test for secured REST API"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://foystor.github.io/2022/08/02/unit-and-integration-test-for-secured-rest-api/&title=Unit Test and Integration Test for secured REST API"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://foystor.github.io/2022/08/02/unit-and-integration-test-for-secured-rest-api/&title=Unit Test and Integration Test for secured REST API"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://foystor.github.io/2022/08/02/unit-and-integration-test-for-secured-rest-api/&title=Unit Test and Integration Test for secured REST API"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://foystor.github.io/2022/08/02/unit-and-integration-test-for-secured-rest-api/&name=Unit Test and Integration Test for secured REST API&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://foystor.github.io/2022/08/02/unit-and-integration-test-for-secured-rest-api/&t=Unit Test and Integration Test for secured REST API"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    Foystor
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Foystor">Projects</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

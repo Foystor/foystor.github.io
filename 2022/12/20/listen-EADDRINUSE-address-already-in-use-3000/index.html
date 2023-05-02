@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="BackgroundI created a Web server in Node.js with the codes below: starter.js12345678const port &#x3D; 3000;const server &#x3D; app.listen(port, listening);function listening() &amp;#123;    console.log(server);">
+<meta property="og:type" content="article">
+<meta property="og:title" content="listen EADDRINUSE: address already in use :::3000">
+<meta property="og:url" content="https://foystor.github.io/2022/12/20/listen-EADDRINUSE-address-already-in-use-3000/index.html">
+<meta property="og:site_name" content="Foystor&#39;s Blog">
+<meta property="og:description" content="BackgroundI created a Web server in Node.js with the codes below: starter.js12345678const port &#x3D; 3000;const server &#x3D; app.listen(port, listening);function listening() &amp;#123;    console.log(server);">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-12-20T01:03:56.000Z">
+<meta property="article:modified_time" content="2023-04-30T02:28:49.718Z">
+<meta property="article:author" content="Foystor">
+<meta property="article:tag" content="Node.js">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>listen EADDRINUSE: address already in use :::3000</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+    <meta name="google-site-verification" content="KO7vvBU3ttqbeRJV6Ki9PydxOBnwaOQYzyAX60YqObE" />
+    <meta name="google-site-verification" content="zLOg-wm0CWmnn7HIsEiEjiz2B_93RmWxLAudRxe2DEk" />
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Foystor">Projects</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2022/12/27/error-0308010C-digital-envelope-routines-unsupported/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2022/11/22/make-sticky-footer/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://foystor.github.io/2022/12/20/listen-EADDRINUSE-address-already-in-use-3000/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://foystor.github.io/2022/12/20/listen-EADDRINUSE-address-already-in-use-3000/&text=listen EADDRINUSE: address already in use :::3000"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://foystor.github.io/2022/12/20/listen-EADDRINUSE-address-already-in-use-3000/&title=listen EADDRINUSE: address already in use :::3000"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://foystor.github.io/2022/12/20/listen-EADDRINUSE-address-already-in-use-3000/&is_video=false&description=listen EADDRINUSE: address already in use :::3000"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=listen EADDRINUSE: address already in use :::3000&body=Check out this article: https://foystor.github.io/2022/12/20/listen-EADDRINUSE-address-already-in-use-3000/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://foystor.github.io/2022/12/20/listen-EADDRINUSE-address-already-in-use-3000/&title=listen EADDRINUSE: address already in use :::3000"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://foystor.github.io/2022/12/20/listen-EADDRINUSE-address-already-in-use-3000/&title=listen EADDRINUSE: address already in use :::3000"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://foystor.github.io/2022/12/20/listen-EADDRINUSE-address-already-in-use-3000/&title=listen EADDRINUSE: address already in use :::3000"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://foystor.github.io/2022/12/20/listen-EADDRINUSE-address-already-in-use-3000/&title=listen EADDRINUSE: address already in use :::3000"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://foystor.github.io/2022/12/20/listen-EADDRINUSE-address-already-in-use-3000/&name=listen EADDRINUSE: address already in use :::3000&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://foystor.github.io/2022/12/20/listen-EADDRINUSE-address-already-in-use-3000/&t=listen EADDRINUSE: address already in use :::3000"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Background"><span class="toc-number">1.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem"><span class="toc-number">2.</span> <span class="toc-text">Problem</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#What%E2%80%99s-wrong"><span class="toc-number">3.</span> <span class="toc-text">What’s wrong</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution"><span class="toc-number">4.</span> <span class="toc-text">Solution</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        listen EADDRINUSE: address already in use :::3000
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Foystor</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-12-20T01:03:56.000Z" itemprop="datePublished">2022-12-20</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Coding-Bugfix/">Coding - Bugfix</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Node-js/" rel="tag">Node.js</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>I created a Web server in <code>Node.js</code> with the codes below:</p>
+<figure class="highlight javascript"><figcaption><span>starter.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> port = <span class="number">3000</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = app.<span class="title function_">listen</span>(port, listening);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">listening</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(server);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`running on localhost:<span class="subst">$&#123;port&#125;</span>`</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>I wanted to stop the server but I inadvertently pressed <code>Ctrl+Z</code> instead of <code>Ctrl+C</code>.</p>
+<p>After that when I tried to start the server with <code>node starter.js</code>, I got the error below:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">events.js:170</span><br><span class="line">      throw er; // Unhandled &#x27;error&#x27; event</span><br><span class="line">      ^</span><br><span class="line"></span><br><span class="line">Error: listen EADDRINUSE: address already in use :::3000</span><br><span class="line">    at Server.setupListenHandle [as _listen2] (net.js:1259:14)</span><br><span class="line">    at listenInCluster (net.js:1307:12)</span><br><span class="line">    at Server.listen (net.js:1395:7)</span><br><span class="line">    at Function.listen (/home/workspace/node_modules/express/lib/application.js:618:24)</span><br><span class="line">    at Object.&lt;anonymous&gt; (/home/workspace/starter.js:25:20)</span><br><span class="line">    at Module._compile (internal/modules/cjs/loader.js:816:30)</span><br><span class="line">    at Object.Module._extensions..js (internal/modules/cjs/loader.js:827:10)</span><br><span class="line">    at Module.load (internal/modules/cjs/loader.js:685:32)</span><br><span class="line">    at Function.Module._load (internal/modules/cjs/loader.js:620:12)</span><br><span class="line">    at Function.Module.runMain (internal/modules/cjs/loader.js:877:12)</span><br><span class="line">Emitted &#x27;error&#x27; event at:</span><br><span class="line">    at emitErrorNT (net.js:1286:8)</span><br><span class="line">    at processTicksAndRejections (internal/process/task_queues.js:81:17)</span><br><span class="line">    at process.runNextTicks [as _tickCallback] (internal/process/task_queues.js:56:3)</span><br><span class="line">    at Function.Module.runMain (internal/modules/cjs/loader.js:880:11)</span><br><span class="line">    at internal/main/run_main_module.js:21:11</span><br></pre></td></tr></table></figure>
+
+<h2 id="What’s-wrong"><a href="#What’s-wrong" class="headerlink" title="What’s wrong"></a>What’s wrong</h2><p>This error tells us, the port number we are trying to run a server is already in use.</p>
+<p><code>Ctrl+Z</code> moves a running application to the background. To stop the server, we should use <code>Ctrl+C</code>.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Use the following command to kill all the node processes currently running before you start the server:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">killall -9 node</span><br></pre></td></tr></table></figure>
+
+<p><br/><br/><br/><br/></p>
+<p><strong><em>References</em></strong></p>
+<p><em><a target="_blank" rel="noopener" href="https://reactgo.com/error-listen-eaddrinuse/">How to Fix the Error: listen EADDRINUSE in Node.js</a></em></p>
+<p><em><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/34257803/node-js-is-still-listening-to-the-port-after-ctrlz">Node js is still listening to the port after ctrl+z</a></em></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/Foystor">Projects</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tags</a></li>
+         
+          <li><a href="/categories/">Categories</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Background"><span class="toc-number">1.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem"><span class="toc-number">2.</span> <span class="toc-text">Problem</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#What%E2%80%99s-wrong"><span class="toc-number">3.</span> <span class="toc-text">What’s wrong</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution"><span class="toc-number">4.</span> <span class="toc-text">Solution</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://foystor.github.io/2022/12/20/listen-EADDRINUSE-address-already-in-use-3000/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://foystor.github.io/2022/12/20/listen-EADDRINUSE-address-already-in-use-3000/&text=listen EADDRINUSE: address already in use :::3000"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://foystor.github.io/2022/12/20/listen-EADDRINUSE-address-already-in-use-3000/&title=listen EADDRINUSE: address already in use :::3000"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://foystor.github.io/2022/12/20/listen-EADDRINUSE-address-already-in-use-3000/&is_video=false&description=listen EADDRINUSE: address already in use :::3000"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=listen EADDRINUSE: address already in use :::3000&body=Check out this article: https://foystor.github.io/2022/12/20/listen-EADDRINUSE-address-already-in-use-3000/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://foystor.github.io/2022/12/20/listen-EADDRINUSE-address-already-in-use-3000/&title=listen EADDRINUSE: address already in use :::3000"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://foystor.github.io/2022/12/20/listen-EADDRINUSE-address-already-in-use-3000/&title=listen EADDRINUSE: address already in use :::3000"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://foystor.github.io/2022/12/20/listen-EADDRINUSE-address-already-in-use-3000/&title=listen EADDRINUSE: address already in use :::3000"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://foystor.github.io/2022/12/20/listen-EADDRINUSE-address-already-in-use-3000/&title=listen EADDRINUSE: address already in use :::3000"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://foystor.github.io/2022/12/20/listen-EADDRINUSE-address-already-in-use-3000/&name=listen EADDRINUSE: address already in use :::3000&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://foystor.github.io/2022/12/20/listen-EADDRINUSE-address-already-in-use-3000/&t=listen EADDRINUSE: address already in use :::3000"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    Foystor
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Foystor">Projects</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

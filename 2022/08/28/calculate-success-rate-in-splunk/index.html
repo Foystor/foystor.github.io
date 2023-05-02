@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Today I will introduce three possible ways to calculate success rate using SPL in Splunk. Calculate success rate of total logs depending on log levelFor example, here I will count all the log entries">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to calculate success rate using SPL in Splunk">
+<meta property="og:url" content="https://foystor.github.io/2022/08/28/calculate-success-rate-in-splunk/index.html">
+<meta property="og:site_name" content="Foystor&#39;s Blog">
+<meta property="og:description" content="Today I will introduce three possible ways to calculate success rate using SPL in Splunk. Calculate success rate of total logs depending on log levelFor example, here I will count all the log entries">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-08-28T03:17:35.000Z">
+<meta property="article:modified_time" content="2023-04-29T10:06:05.049Z">
+<meta property="article:author" content="Foystor">
+<meta property="article:tag" content="Logging">
+<meta property="article:tag" content="Splunk">
+<meta property="article:tag" content="SPL">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>How to calculate success rate using SPL in Splunk</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+    <meta name="google-site-verification" content="KO7vvBU3ttqbeRJV6Ki9PydxOBnwaOQYzyAX60YqObE" />
+    <meta name="google-site-verification" content="zLOg-wm0CWmnn7HIsEiEjiz2B_93RmWxLAudRxe2DEk" />
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Foystor">Projects</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2022/08/28/get-splunk-alerts-triggered/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2022/08/26/Failed-to-execute-goal-org-apache-maven-plugins-maven-surefire-plugin-2-22-2-test-default-test-on-project-auth-course-There-are-test-failures/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://foystor.github.io/2022/08/28/calculate-success-rate-in-splunk/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://foystor.github.io/2022/08/28/calculate-success-rate-in-splunk/&text=How to calculate success rate using SPL in Splunk"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://foystor.github.io/2022/08/28/calculate-success-rate-in-splunk/&title=How to calculate success rate using SPL in Splunk"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://foystor.github.io/2022/08/28/calculate-success-rate-in-splunk/&is_video=false&description=How to calculate success rate using SPL in Splunk"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=How to calculate success rate using SPL in Splunk&body=Check out this article: https://foystor.github.io/2022/08/28/calculate-success-rate-in-splunk/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://foystor.github.io/2022/08/28/calculate-success-rate-in-splunk/&title=How to calculate success rate using SPL in Splunk"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://foystor.github.io/2022/08/28/calculate-success-rate-in-splunk/&title=How to calculate success rate using SPL in Splunk"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://foystor.github.io/2022/08/28/calculate-success-rate-in-splunk/&title=How to calculate success rate using SPL in Splunk"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://foystor.github.io/2022/08/28/calculate-success-rate-in-splunk/&title=How to calculate success rate using SPL in Splunk"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://foystor.github.io/2022/08/28/calculate-success-rate-in-splunk/&name=How to calculate success rate using SPL in Splunk&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://foystor.github.io/2022/08/28/calculate-success-rate-in-splunk/&t=How to calculate success rate using SPL in Splunk"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Calculate-success-rate-of-total-logs-depending-on-log-level"><span class="toc-number">1.</span> <span class="toc-text">Calculate success rate of total logs depending on log level</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Calculate-success-rate-of-specific-HTTP-request"><span class="toc-number">2.</span> <span class="toc-text">Calculate success rate of specific HTTP request</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Calculate-success-rate-within-a-specific-time-interval"><span class="toc-number">3.</span> <span class="toc-text">Calculate success rate within a specific time interval</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        How to calculate success rate using SPL in Splunk
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Foystor</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-08-28T03:17:35.000Z" itemprop="datePublished">2022-08-28</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Coding-Tutorial/">Coding - Tutorial</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Logging/" rel="tag">Logging</a>, <a class="tag-link-link" href="/tags/SPL/" rel="tag">SPL</a>, <a class="tag-link-link" href="/tags/Splunk/" rel="tag">Splunk</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>Today I will introduce three possible ways to calculate success rate using <code>SPL</code> in <code>Splunk</code>.</p>
+<h2 id="Calculate-success-rate-of-total-logs-depending-on-log-level"><a href="#Calculate-success-rate-of-total-logs-depending-on-log-level" class="headerlink" title="Calculate success rate of total logs depending on log level"></a>Calculate success rate of total logs depending on log level</h2><p>For example, here I will count all the log entries as <strong>Total</strong>, while entries that have log level “ERROR” as <strong>Failures</strong>.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source=&quot;*/ECommerceApplication/starter_code/logs/*&quot; host=&quot;Mac.local&quot; sourcetype=&quot;log4j&quot;</span><br><span class="line"> | stats count(eval(match(LogLevel, &quot;ERROR&quot;))) AS f, count as t</span><br><span class="line"> | eval s = t-f, percF = (f/t)*100, percS=100-percF</span><br><span class="line"> | rename t as Total, percF as FailureRate, percS as SuccessRate, f as FailCount, s as SuccessCount</span><br><span class="line"> | table Total, FailCount, FailureRate, SuccessCount, SuccessRate</span><br></pre></td></tr></table></figure>
+
+<figure>
+  <img src=errorFail.png>
+  <figcaption>Total, FailCount, FailureRate, SuccessCount, SuccessRate</figcaption>
+</figure>
+
+<h2 id="Calculate-success-rate-of-specific-HTTP-request"><a href="#Calculate-success-rate-of-specific-HTTP-request" class="headerlink" title="Calculate success rate of specific HTTP request"></a>Calculate success rate of specific HTTP request</h2><p>For example, here I will calculate the success rate of requests that create user.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source=&quot;*/ECommerceApplication/starter_code/logs/*&quot; host=&quot;Mac.local&quot; sourcetype=&quot;log4j&quot; Create user</span><br><span class="line"> | stats count(eval(searchmatch(&quot;*Create user success*&quot;))) AS s, count as t</span><br><span class="line"> | eval percS = round((s/t)*100,2)</span><br><span class="line"> | rename t as TotalCreateUser, percS as SuccessRate</span><br><span class="line"> | table TotalCreateUser, SuccessRate</span><br></pre></td></tr></table></figure>
+
+<figure>
+  <img src=createSuccess.png>
+  <figcaption>TotalCreateUser, SuccessRate</figcaption>
+</figure>
+
+<h2 id="Calculate-success-rate-within-a-specific-time-interval"><a href="#Calculate-success-rate-within-a-specific-time-interval" class="headerlink" title="Calculate success rate within a specific time interval"></a>Calculate success rate within a specific time interval</h2><p>For example, here I will calculate the success rate per day of requests that create user.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source=&quot;*/ECommerceApplication/starter_code/logs/*&quot; host=&quot;Mac.local&quot; sourcetype=&quot;log4j&quot; Create user</span><br><span class="line"> | bucket _time span=day</span><br><span class="line"> | stats count as t,</span><br><span class="line">         count(eval(searchmatch(&quot;*success*&quot;))) as s by _time</span><br><span class="line"> | eval percS = round((s/t)*100,2)</span><br><span class="line"> | rename percS as &quot;Success Rate&quot;</span><br><span class="line"> | fields - s,t</span><br></pre></td></tr></table></figure>
+
+<figure>
+  <img src=successDay.png>
+  <figcaption>Success rate per day</figcaption>
+</figure>
+
+<p><br/><br/><br/><br/></p>
+<p><strong><em>References</em></strong></p>
+<p><em><a target="_blank" rel="noopener" href="https://community.splunk.com/t5/Splunk-Search/How-to-write-a-search-where-if-a-certain-string-is-found-in-a/m-p/136680">How to write a search where if a certain string is found in a log, set Status&#x3D;1, otherwise Status&#x3D;0?</a></em></p>
+<p><em><a target="_blank" rel="noopener" href="https://community.splunk.com/t5/Splunk-Search/How-to-write-a-search-to-calculate-percentages-for-success-and/m-p/229614">How to write a search to calculate percentages for success and failure rates from my user log data?</a></em></p>
+<p><em><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/70232100/how-to-calculate-the-percentage-of-failed-requests-http-status-401-using-splun">How to calculate the percentage of failed requests (HTTP status 401) using Splunk query?</a></em></p>
+<p><em><a target="_blank" rel="noopener" href="https://community.splunk.com/t5/Splunk-Search/Need-to-get-stats-count-by-day/m-p/131316">Need to get stats count by day</a></em></p>
+<p><em><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/58087232/splunk-stats-search-count-by-day-with-percentage-against-day-total">Splunk - Stats search count by day with percentage against day-total</a></em></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/Foystor">Projects</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tags</a></li>
+         
+          <li><a href="/categories/">Categories</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Calculate-success-rate-of-total-logs-depending-on-log-level"><span class="toc-number">1.</span> <span class="toc-text">Calculate success rate of total logs depending on log level</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Calculate-success-rate-of-specific-HTTP-request"><span class="toc-number">2.</span> <span class="toc-text">Calculate success rate of specific HTTP request</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Calculate-success-rate-within-a-specific-time-interval"><span class="toc-number">3.</span> <span class="toc-text">Calculate success rate within a specific time interval</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://foystor.github.io/2022/08/28/calculate-success-rate-in-splunk/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://foystor.github.io/2022/08/28/calculate-success-rate-in-splunk/&text=How to calculate success rate using SPL in Splunk"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://foystor.github.io/2022/08/28/calculate-success-rate-in-splunk/&title=How to calculate success rate using SPL in Splunk"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://foystor.github.io/2022/08/28/calculate-success-rate-in-splunk/&is_video=false&description=How to calculate success rate using SPL in Splunk"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=How to calculate success rate using SPL in Splunk&body=Check out this article: https://foystor.github.io/2022/08/28/calculate-success-rate-in-splunk/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://foystor.github.io/2022/08/28/calculate-success-rate-in-splunk/&title=How to calculate success rate using SPL in Splunk"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://foystor.github.io/2022/08/28/calculate-success-rate-in-splunk/&title=How to calculate success rate using SPL in Splunk"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://foystor.github.io/2022/08/28/calculate-success-rate-in-splunk/&title=How to calculate success rate using SPL in Splunk"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://foystor.github.io/2022/08/28/calculate-success-rate-in-splunk/&title=How to calculate success rate using SPL in Splunk"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://foystor.github.io/2022/08/28/calculate-success-rate-in-splunk/&name=How to calculate success rate using SPL in Splunk&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://foystor.github.io/2022/08/28/calculate-success-rate-in-splunk/&t=How to calculate success rate using SPL in Splunk"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    Foystor
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Foystor">Projects</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

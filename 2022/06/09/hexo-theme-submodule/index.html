@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="ProblemI failed to git add . the source files of my Hexo blog project, and the error said: You&amp;#x27;ve added another git repository inside your current repository.  What’s wrongThat was because inside">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Failed to execute &quot;git add&quot; on the Hexo project due to the theme submodule">
+<meta property="og:url" content="https://foystor.github.io/2022/06/09/hexo-theme-submodule/index.html">
+<meta property="og:site_name" content="Foystor&#39;s Blog">
+<meta property="og:description" content="ProblemI failed to git add . the source files of my Hexo blog project, and the error said: You&amp;#x27;ve added another git repository inside your current repository.  What’s wrongThat was because inside">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-06-08T17:25:24.000Z">
+<meta property="article:modified_time" content="2023-04-29T10:06:05.133Z">
+<meta property="article:author" content="Foystor">
+<meta property="article:tag" content="Git">
+<meta property="article:tag" content="Hexo">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Failed to execute &#34;git add&#34; on the Hexo project due to the theme submodule</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+    <meta name="google-site-verification" content="KO7vvBU3ttqbeRJV6Ki9PydxOBnwaOQYzyAX60YqObE" />
+    <meta name="google-site-verification" content="zLOg-wm0CWmnn7HIsEiEjiz2B_93RmWxLAudRxe2DEk" />
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Foystor">Projects</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2022/07/02/intellij-cannot-resolve-symbol/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2022/06/02/ConcurrentModificationException/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://foystor.github.io/2022/06/09/hexo-theme-submodule/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://foystor.github.io/2022/06/09/hexo-theme-submodule/&text=Failed to execute &#34;git add&#34; on the Hexo project due to the theme submodule"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://foystor.github.io/2022/06/09/hexo-theme-submodule/&title=Failed to execute &#34;git add&#34; on the Hexo project due to the theme submodule"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://foystor.github.io/2022/06/09/hexo-theme-submodule/&is_video=false&description=Failed to execute &#34;git add&#34; on the Hexo project due to the theme submodule"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Failed to execute &#34;git add&#34; on the Hexo project due to the theme submodule&body=Check out this article: https://foystor.github.io/2022/06/09/hexo-theme-submodule/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://foystor.github.io/2022/06/09/hexo-theme-submodule/&title=Failed to execute &#34;git add&#34; on the Hexo project due to the theme submodule"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://foystor.github.io/2022/06/09/hexo-theme-submodule/&title=Failed to execute &#34;git add&#34; on the Hexo project due to the theme submodule"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://foystor.github.io/2022/06/09/hexo-theme-submodule/&title=Failed to execute &#34;git add&#34; on the Hexo project due to the theme submodule"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://foystor.github.io/2022/06/09/hexo-theme-submodule/&title=Failed to execute &#34;git add&#34; on the Hexo project due to the theme submodule"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://foystor.github.io/2022/06/09/hexo-theme-submodule/&name=Failed to execute &#34;git add&#34; on the Hexo project due to the theme submodule&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://foystor.github.io/2022/06/09/hexo-theme-submodule/&t=Failed to execute &#34;git add&#34; on the Hexo project due to the theme submodule"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem"><span class="toc-number">1.</span> <span class="toc-text">Problem</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#What%E2%80%99s-wrong"><span class="toc-number">2.</span> <span class="toc-text">What’s wrong</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution"><span class="toc-number">3.</span> <span class="toc-text">Solution</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Failed to execute &#34;git add&#34; on the Hexo project due to the theme submodule
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Foystor</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-06-08T17:25:24.000Z" itemprop="datePublished">2022-06-09</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Coding-Bugfix/">Coding - Bugfix</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Git/" rel="tag">Git</a>, <a class="tag-link-link" href="/tags/Hexo/" rel="tag">Hexo</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>I failed to <code>git add .</code> the source files of my <code>Hexo</code> blog project, and the error said:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">You&#x27;ve added another git repository inside your current repository.</span><br></pre></td></tr></table></figure>
+
+<h2 id="What’s-wrong"><a href="#What’s-wrong" class="headerlink" title="What’s wrong"></a>What’s wrong</h2><p>That was because inside this repository, I had cloned the theme files from another github repository.</p>
+<p>So <code>Git</code> identifies the theme as a submodule.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>To solve this problem, follow the steps below:</p>
+<ol>
+<li><p><strong>Get to where the theme directory is, and remove the <code>.git</code> folder within it</strong></p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ rm -rf .git</span><br></pre></td></tr></table></figure>
+
+<p> We can check if it’s removed successfully by listing out all the files within it:</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ ls -a</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Remove cached files in root directory of our hexo project</strong></p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git rm -r --cached .</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Add and commit all files again</strong></p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git commit -am &#x27;commit message&#x27;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><br/><br/><br/><br/></p>
+<p><strong><em>References</em></strong></p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/53902804/git-is-not-tracking-hexo-theme-file"><em>Git is not tracking Hexo theme file</em></a></p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1583762"><em>git仓库包含子仓库时，add报错的解决办法</em></a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/Foystor">Projects</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tags</a></li>
+         
+          <li><a href="/categories/">Categories</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem"><span class="toc-number">1.</span> <span class="toc-text">Problem</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#What%E2%80%99s-wrong"><span class="toc-number">2.</span> <span class="toc-text">What’s wrong</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution"><span class="toc-number">3.</span> <span class="toc-text">Solution</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://foystor.github.io/2022/06/09/hexo-theme-submodule/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://foystor.github.io/2022/06/09/hexo-theme-submodule/&text=Failed to execute &#34;git add&#34; on the Hexo project due to the theme submodule"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://foystor.github.io/2022/06/09/hexo-theme-submodule/&title=Failed to execute &#34;git add&#34; on the Hexo project due to the theme submodule"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://foystor.github.io/2022/06/09/hexo-theme-submodule/&is_video=false&description=Failed to execute &#34;git add&#34; on the Hexo project due to the theme submodule"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Failed to execute &#34;git add&#34; on the Hexo project due to the theme submodule&body=Check out this article: https://foystor.github.io/2022/06/09/hexo-theme-submodule/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://foystor.github.io/2022/06/09/hexo-theme-submodule/&title=Failed to execute &#34;git add&#34; on the Hexo project due to the theme submodule"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://foystor.github.io/2022/06/09/hexo-theme-submodule/&title=Failed to execute &#34;git add&#34; on the Hexo project due to the theme submodule"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://foystor.github.io/2022/06/09/hexo-theme-submodule/&title=Failed to execute &#34;git add&#34; on the Hexo project due to the theme submodule"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://foystor.github.io/2022/06/09/hexo-theme-submodule/&title=Failed to execute &#34;git add&#34; on the Hexo project due to the theme submodule"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://foystor.github.io/2022/06/09/hexo-theme-submodule/&name=Failed to execute &#34;git add&#34; on the Hexo project due to the theme submodule&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://foystor.github.io/2022/06/09/hexo-theme-submodule/&t=Failed to execute &#34;git add&#34; on the Hexo project due to the theme submodule"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    Foystor
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Foystor">Projects</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

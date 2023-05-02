@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="BackgroundI used Mockito in my test and here are the source codes: pom.xml123456789101112131415161718192021222324252627&lt;parent&gt;    &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;    &lt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Could not initialize plugin: interface org.mockito.plugins.MockMaker">
+<meta property="og:url" content="https://foystor.github.io/2022/08/23/Could-not-initialize-plugin-interface-org-mockito-plugins-MockMaker/index.html">
+<meta property="og:site_name" content="Foystor&#39;s Blog">
+<meta property="og:description" content="BackgroundI used Mockito in my test and here are the source codes: pom.xml123456789101112131415161718192021222324252627&lt;parent&gt;    &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;    &lt;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-08-23T07:39:03.000Z">
+<meta property="article:modified_time" content="2023-04-29T10:06:05.015Z">
+<meta property="article:author" content="Foystor">
+<meta property="article:tag" content="Spring Boot">
+<meta property="article:tag" content="Mockito">
+<meta property="article:tag" content="Testing">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Could not initialize plugin: interface org.mockito.plugins.MockMaker</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+    <meta name="google-site-verification" content="KO7vvBU3ttqbeRJV6Ki9PydxOBnwaOQYzyAX60YqObE" />
+    <meta name="google-site-verification" content="zLOg-wm0CWmnn7HIsEiEjiz2B_93RmWxLAudRxe2DEk" />
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Foystor">Projects</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2022/08/24/Class-path-contains-multiple-SLF4J-bindings/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2022/08/19/schema-sql-and-data-sql-not-loading/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://foystor.github.io/2022/08/23/Could-not-initialize-plugin-interface-org-mockito-plugins-MockMaker/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://foystor.github.io/2022/08/23/Could-not-initialize-plugin-interface-org-mockito-plugins-MockMaker/&text=Could not initialize plugin: interface org.mockito.plugins.MockMaker"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://foystor.github.io/2022/08/23/Could-not-initialize-plugin-interface-org-mockito-plugins-MockMaker/&title=Could not initialize plugin: interface org.mockito.plugins.MockMaker"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://foystor.github.io/2022/08/23/Could-not-initialize-plugin-interface-org-mockito-plugins-MockMaker/&is_video=false&description=Could not initialize plugin: interface org.mockito.plugins.MockMaker"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Could not initialize plugin: interface org.mockito.plugins.MockMaker&body=Check out this article: https://foystor.github.io/2022/08/23/Could-not-initialize-plugin-interface-org-mockito-plugins-MockMaker/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://foystor.github.io/2022/08/23/Could-not-initialize-plugin-interface-org-mockito-plugins-MockMaker/&title=Could not initialize plugin: interface org.mockito.plugins.MockMaker"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://foystor.github.io/2022/08/23/Could-not-initialize-plugin-interface-org-mockito-plugins-MockMaker/&title=Could not initialize plugin: interface org.mockito.plugins.MockMaker"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://foystor.github.io/2022/08/23/Could-not-initialize-plugin-interface-org-mockito-plugins-MockMaker/&title=Could not initialize plugin: interface org.mockito.plugins.MockMaker"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://foystor.github.io/2022/08/23/Could-not-initialize-plugin-interface-org-mockito-plugins-MockMaker/&title=Could not initialize plugin: interface org.mockito.plugins.MockMaker"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://foystor.github.io/2022/08/23/Could-not-initialize-plugin-interface-org-mockito-plugins-MockMaker/&name=Could not initialize plugin: interface org.mockito.plugins.MockMaker&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://foystor.github.io/2022/08/23/Could-not-initialize-plugin-interface-org-mockito-plugins-MockMaker/&t=Could not initialize plugin: interface org.mockito.plugins.MockMaker"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Background"><span class="toc-number">1.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem"><span class="toc-number">2.</span> <span class="toc-text">Problem</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution"><span class="toc-number">3.</span> <span class="toc-text">Solution</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Could not initialize plugin: interface org.mockito.plugins.MockMaker
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Foystor</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-08-23T07:39:03.000Z" itemprop="datePublished">2022-08-23</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Coding-Bugfix/">Coding - Bugfix</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Mockito/" rel="tag">Mockito</a>, <a class="tag-link-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a>, <a class="tag-link-link" href="/tags/Testing/" rel="tag">Testing</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>I used <code>Mockito</code> in my test and here are the source codes:</p>
+<figure class="highlight xml"><figcaption><span>pom.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.5.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">relativePath</span>/&gt;</span> <span class="comment">&lt;!-- lookup parent from repository --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">java.version</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">java.version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">maven-jar-plugin.version</span>&gt;</span>3.1.1<span class="tag">&lt;/<span class="name">maven-jar-plugin.version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    // other dependencies...</span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.13.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mockito<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mockito-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.7.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><figcaption><span>UserControllerTest.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> UserController userController;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="type">UserRepository</span> <span class="variable">userRepo</span> <span class="operator">=</span> mock(UserRepository.class);</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="type">CartRepository</span> <span class="variable">cartRepo</span> <span class="operator">=</span> mock(CartRepository.class);</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="type">BCryptPasswordEncoder</span> <span class="variable">encoder</span> <span class="operator">=</span> mock(BCryptPasswordEncoder.class);</span><br><span class="line"></span><br><span class="line"><span class="meta">@Before</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setUp</span><span class="params">()</span> &#123;</span><br><span class="line">    userController = <span class="keyword">new</span> <span class="title class_">UserController</span>();</span><br><span class="line">    TestUtils.injectObjects(userController, <span class="string">&quot;userRepository&quot;</span>, userRepo);</span><br><span class="line">    TestUtils.injectObjects(userController, <span class="string">&quot;cartRepository&quot;</span>, cartRepo);</span><br><span class="line">    TestUtils.injectObjects(userController, <span class="string">&quot;bCryptPasswordEncoder&quot;</span>, encoder);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>However, I can not run test with <code>Mockito</code> and received the error below:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java.lang.IllegalStateException: Could not initialize plugin: interface org.mockito.plugins.MockMaker (alternate: null)</span><br><span class="line"></span><br><span class="line">	at org.mockito.internal.configuration.plugins.PluginLoader$1.invoke(PluginLoader.java:88)</span><br><span class="line">	at jdk.proxy2/jdk.proxy2.$Proxy8.isTypeMockable(Unknown Source)</span><br><span class="line">	at org.mockito.internal.util.MockUtil.typeMockabilityOf(MockUtil.java:33)</span><br><span class="line">	at org.mockito.internal.util.MockCreationValidator.validateType(MockCreationValidator.java:22)</span><br><span class="line">	at org.mockito.internal.creation.MockSettingsImpl.validatedSettings(MockSettingsImpl.java:261)</span><br><span class="line">	at org.mockito.internal.creation.MockSettingsImpl.build(MockSettingsImpl.java:234)</span><br><span class="line">	at org.mockito.internal.MockitoCore.mock(MockitoCore.java:94)</span><br><span class="line">	at org.mockito.Mockito.mock(Mockito.java:1981)</span><br><span class="line">	at org.mockito.Mockito.mock(Mockito.java:1896)</span><br><span class="line">	at com.example.demo.controllers.UserControllerTest.&lt;init&gt;(UserControllerTest.java:22)</span><br><span class="line">	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)</span><br><span class="line">	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)</span><br><span class="line">	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)</span><br><span class="line">	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)</span><br><span class="line">	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)</span><br><span class="line">	at org.junit.runners.BlockJUnit4ClassRunner.createTest(BlockJUnit4ClassRunner.java:250)</span><br><span class="line">	at org.junit.runners.BlockJUnit4ClassRunner.createTest(BlockJUnit4ClassRunner.java:260)</span><br><span class="line">	at org.junit.runners.BlockJUnit4ClassRunner$2.runReflectiveCall(BlockJUnit4ClassRunner.java:309)</span><br><span class="line">	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)</span><br><span class="line">	at org.junit.runners.BlockJUnit4ClassRunner.methodBlock(BlockJUnit4ClassRunner.java:306)</span><br><span class="line">	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)</span><br><span class="line">	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)</span><br><span class="line">	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)</span><br><span class="line">	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)</span><br><span class="line">	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)</span><br><span class="line">	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)</span><br><span class="line">	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)</span><br><span class="line">	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)</span><br><span class="line">	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)</span><br><span class="line">	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)</span><br><span class="line">	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)</span><br><span class="line">	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)</span><br><span class="line">	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)</span><br><span class="line">	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)</span><br><span class="line">	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)</span><br><span class="line">	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)</span><br><span class="line">	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:235)</span><br><span class="line">	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:54)</span><br><span class="line">Caused by: java.lang.IllegalStateException: Internal problem occurred, please report it. Mockito is unable to load the default implementation of class that is a part of Mockito distribution. Failed to load interface org.mockito.plugins.MockMaker</span><br><span class="line">	at org.mockito.internal.configuration.plugins.DefaultMockitoPlugins.create(DefaultMockitoPlugins.java:85)</span><br><span class="line">	at org.mockito.internal.configuration.plugins.DefaultMockitoPlugins.getDefaultPlugin(DefaultMockitoPlugins.java:59)</span><br><span class="line">	at org.mockito.internal.configuration.plugins.PluginLoader.loadPlugin(PluginLoader.java:79)</span><br><span class="line">	at org.mockito.internal.configuration.plugins.PluginLoader.loadPlugin(PluginLoader.java:54)</span><br><span class="line">	at org.mockito.internal.configuration.plugins.PluginRegistry.&lt;init&gt;(PluginRegistry.java:28)</span><br><span class="line">	at org.mockito.internal.configuration.plugins.Plugins.&lt;clinit&gt;(Plugins.java:22)</span><br><span class="line">	at org.mockito.internal.MockitoCore.&lt;clinit&gt;(MockitoCore.java:77)</span><br><span class="line">	at org.mockito.Mockito.&lt;clinit&gt;(Mockito.java:1630)</span><br><span class="line">	... 29 more</span><br><span class="line">Caused by: java.lang.reflect.InvocationTargetException</span><br><span class="line">	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)</span><br><span class="line">	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)</span><br><span class="line">	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)</span><br><span class="line">	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)</span><br><span class="line">	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)</span><br><span class="line">	at org.mockito.internal.configuration.plugins.DefaultMockitoPlugins.create(DefaultMockitoPlugins.java:83)</span><br><span class="line">	... 36 more</span><br><span class="line">Caused by: org.mockito.exceptions.base.MockitoInitializationException: </span><br><span class="line">It seems like you are running Mockito with an incomplete or inconsistent class path. Byte Buddy could not be loaded.</span><br><span class="line"></span><br><span class="line">Byte Buddy is available on Maven Central as &#x27;net.bytebuddy:byte-buddy&#x27; with the module name &#x27;net.bytebuddy&#x27;.</span><br><span class="line">For the inline mock maker, &#x27;net.bytebuddy:byte-buddy-agent&#x27; with the module name &#x27;net.bytebuddy.agent&#x27; is also required.</span><br><span class="line">Normally, your IDE or build tool (such as Maven or Gradle) should take care of your class path completion but </span><br><span class="line">	at org.mockito.internal.exceptions.Reporter.missingByteBuddyDependency(Reporter.java:1131)</span><br><span class="line">	at org.mockito.internal.creation.bytebuddy.ByteBuddyMockMaker.&lt;init&gt;(ByteBuddyMockMaker.java:31)</span><br><span class="line">	... 42 more</span><br><span class="line">Caused by: java.lang.NoClassDefFoundError: net/bytebuddy/utility/GraalImageCode</span><br><span class="line">	at org.mockito.internal.creation.bytebuddy.SubclassInjectionLoader.&lt;init&gt;(SubclassInjectionLoader.java:34)</span><br><span class="line">	at org.mockito.internal.creation.bytebuddy.SubclassByteBuddyMockMaker.&lt;init&gt;(SubclassByteBuddyMockMaker.java:33)</span><br><span class="line">	at org.mockito.internal.creation.bytebuddy.ByteBuddyMockMaker.&lt;init&gt;(ByteBuddyMockMaker.java:29)</span><br><span class="line">	... 42 more</span><br><span class="line">Caused by: java.lang.ClassNotFoundException: net.bytebuddy.utility.GraalImageCode</span><br><span class="line">	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)</span><br><span class="line">	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)</span><br><span class="line">	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:520)</span><br><span class="line">	... 45 more</span><br></pre></td></tr></table></figure>
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Remove the version declaration of <code>Mockito</code> works for me:</p>
+<figure class="highlight xml"><figcaption><span>pom.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mockito<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mockito-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><br/><br/><br/><br/></p>
+<p><strong><em>References</em></strong></p>
+<p><em><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/41956692/could-not-initialize-plugin-interface-org-mockito-plugins-mockmaker">Could not initialize plugin: interface org.mockito.plugins.MockMaker</a></em></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/Foystor">Projects</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tags</a></li>
+         
+          <li><a href="/categories/">Categories</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Background"><span class="toc-number">1.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem"><span class="toc-number">2.</span> <span class="toc-text">Problem</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution"><span class="toc-number">3.</span> <span class="toc-text">Solution</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://foystor.github.io/2022/08/23/Could-not-initialize-plugin-interface-org-mockito-plugins-MockMaker/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://foystor.github.io/2022/08/23/Could-not-initialize-plugin-interface-org-mockito-plugins-MockMaker/&text=Could not initialize plugin: interface org.mockito.plugins.MockMaker"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://foystor.github.io/2022/08/23/Could-not-initialize-plugin-interface-org-mockito-plugins-MockMaker/&title=Could not initialize plugin: interface org.mockito.plugins.MockMaker"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://foystor.github.io/2022/08/23/Could-not-initialize-plugin-interface-org-mockito-plugins-MockMaker/&is_video=false&description=Could not initialize plugin: interface org.mockito.plugins.MockMaker"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Could not initialize plugin: interface org.mockito.plugins.MockMaker&body=Check out this article: https://foystor.github.io/2022/08/23/Could-not-initialize-plugin-interface-org-mockito-plugins-MockMaker/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://foystor.github.io/2022/08/23/Could-not-initialize-plugin-interface-org-mockito-plugins-MockMaker/&title=Could not initialize plugin: interface org.mockito.plugins.MockMaker"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://foystor.github.io/2022/08/23/Could-not-initialize-plugin-interface-org-mockito-plugins-MockMaker/&title=Could not initialize plugin: interface org.mockito.plugins.MockMaker"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://foystor.github.io/2022/08/23/Could-not-initialize-plugin-interface-org-mockito-plugins-MockMaker/&title=Could not initialize plugin: interface org.mockito.plugins.MockMaker"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://foystor.github.io/2022/08/23/Could-not-initialize-plugin-interface-org-mockito-plugins-MockMaker/&title=Could not initialize plugin: interface org.mockito.plugins.MockMaker"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://foystor.github.io/2022/08/23/Could-not-initialize-plugin-interface-org-mockito-plugins-MockMaker/&name=Could not initialize plugin: interface org.mockito.plugins.MockMaker&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://foystor.github.io/2022/08/23/Could-not-initialize-plugin-interface-org-mockito-plugins-MockMaker/&t=Could not initialize plugin: interface org.mockito.plugins.MockMaker"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    Foystor
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Foystor">Projects</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

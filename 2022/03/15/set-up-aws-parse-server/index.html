@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="I learned Android along with The Complete Android Oreo Developer Course and was stuck in the Instagram Clone chapter when I tried to set up the AWS EC2 Parse Server. After googling many times, I final">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Set up AWS EC2 Parse Server in Android">
+<meta property="og:url" content="https://foystor.github.io/2022/03/15/set-up-aws-parse-server/index.html">
+<meta property="og:site_name" content="Foystor&#39;s Blog">
+<meta property="og:description" content="I learned Android along with The Complete Android Oreo Developer Course and was stuck in the Instagram Clone chapter when I tried to set up the AWS EC2 Parse Server. After googling many times, I final">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-15T09:09:32.000Z">
+<meta property="article:modified_time" content="2023-05-02T07:36:38.484Z">
+<meta property="article:author" content="Foystor">
+<meta property="article:tag" content="AWS">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="Parse Server">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Set up AWS EC2 Parse Server in Android</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+    <meta name="google-site-verification" content="KO7vvBU3ttqbeRJV6Ki9PydxOBnwaOQYzyAX60YqObE" />
+    <meta name="google-site-verification" content="zLOg-wm0CWmnn7HIsEiEjiz2B_93RmWxLAudRxe2DEk" />
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Foystor">Projects</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2022/03/18/java-design-patterns/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://foystor.github.io/2022/03/15/set-up-aws-parse-server/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://foystor.github.io/2022/03/15/set-up-aws-parse-server/&text=Set up AWS EC2 Parse Server in Android"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://foystor.github.io/2022/03/15/set-up-aws-parse-server/&title=Set up AWS EC2 Parse Server in Android"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://foystor.github.io/2022/03/15/set-up-aws-parse-server/&is_video=false&description=Set up AWS EC2 Parse Server in Android"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Set up AWS EC2 Parse Server in Android&body=Check out this article: https://foystor.github.io/2022/03/15/set-up-aws-parse-server/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://foystor.github.io/2022/03/15/set-up-aws-parse-server/&title=Set up AWS EC2 Parse Server in Android"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://foystor.github.io/2022/03/15/set-up-aws-parse-server/&title=Set up AWS EC2 Parse Server in Android"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://foystor.github.io/2022/03/15/set-up-aws-parse-server/&title=Set up AWS EC2 Parse Server in Android"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://foystor.github.io/2022/03/15/set-up-aws-parse-server/&title=Set up AWS EC2 Parse Server in Android"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://foystor.github.io/2022/03/15/set-up-aws-parse-server/&name=Set up AWS EC2 Parse Server in Android&description=&lt;p&gt;I learned Android along with &lt;a href=&#34;https://www.udemy.com/course/the-complete-android-oreo-developer-course/&#34;&gt;The Complete Android Oreo Developer Course&lt;/a&gt; and was stuck in the Instagram Clone chapter when I tried to set up the AWS EC2 Parse Server.&lt;/p&gt;
+&lt;p&gt;After googling many times, I finally figured it out and got access to the Parse Dashboard!&lt;/p&gt;
+&lt;p&gt;If you also have trouble setting up the Parse Server, just go ahead and see if my solutions would inspire you.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://foystor.github.io/2022/03/15/set-up-aws-parse-server/&t=Set up AWS EC2 Parse Server in Android"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Connect-to-the-instance-using-SSH-client"><span class="toc-number">1.</span> <span class="toc-text">Connect to the instance using SSH client</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Do-some-setup"><span class="toc-number">2.</span> <span class="toc-text">Do some setup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Connect-to-the-Parse-Dashboard"><span class="toc-number">3.</span> <span class="toc-text">Connect to the Parse Dashboard</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Configure-publicServerURL"><span class="toc-number">4.</span> <span class="toc-text">Configure publicServerURL</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Set up AWS EC2 Parse Server in Android
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Foystor</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-03-15T09:09:32.000Z" itemprop="datePublished">2022-03-15</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Coding-Tutorial/">Coding - Tutorial</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/AWS/" rel="tag">AWS</a>, <a class="tag-link-link" href="/tags/Android/" rel="tag">Android</a>, <a class="tag-link-link" href="/tags/Parse-Server/" rel="tag">Parse Server</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>I learned Android along with <a target="_blank" rel="noopener" href="https://www.udemy.com/course/the-complete-android-oreo-developer-course/">The Complete Android Oreo Developer Course</a> and was stuck in the Instagram Clone chapter when I tried to set up the AWS EC2 Parse Server.</p>
+<p>After googling many times, I finally figured it out and got access to the Parse Dashboard!</p>
+<p>If you also have trouble setting up the Parse Server, just go ahead and see if my solutions would inspire you.</p>
+<span id="more"></span>
+
+<h2 id="Connect-to-the-instance-using-SSH-client"><a href="#Connect-to-the-instance-using-SSH-client" class="headerlink" title="Connect to the instance using SSH client"></a>Connect to the instance using SSH client</h2><p>In Amazon Dashboard choose <code>Instances</code> from the left sidebar, and then select the instance we would like to connect to.</p>
+<figure>
+  <img src=connect.png>
+  <figcaption>Select an instance and click the Connect button</figcaption>
+</figure>
+
+<figure>
+  <img src=ssh-client.png>
+  <figcaption>Click on the SSH client tab</figcaption>
+</figure>
+
+<p>We can just follow the instruction above, but there might be some unexpected problems.</p>
+<p>So refer to the steps below:</p>
+<ol>
+<li><p><strong>Open the terminal and locate the private key file</strong></p>
+<p> Check the <code>.pem.txt</code> file we’ve just downloaded when creating a new key pair.</p>
+<p> Remove the <strong>“.txt”</strong> behind to keep it as a <code>.pem</code> file. This <code>.pem</code> file is our private key file.</p>
+<p> Then open up the terminal and get to where the file is. In my case it’s on the desktop:</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ cd Desktop</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Change the permissions of the <code>.pem</code> file so only the root user can read it</strong></p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ chmod 400 instagramandroid.pem</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Connect to the instance using its Public DNS</strong></p>
+<p> In this step, simply copying the command in the instruction might get errors.</p>
+<p> We should verify that we are connecting with the <a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#TroubleshootingInstancesConnectingPuTTY">appropriate user name for our AMI</a>.</p>
+<p> In my case:</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ ssh -i &quot;instagramandroid.pem&quot; bitnami@ec2-3-14-27-1.us-east-2.compute.amazonaws.com</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>If we see something on our terminal screen like this:</p>
+<figure>
+  <img src=success-connect.png>
+</figure>
+
+<p>That means we’ve successfully connected to our instance.</p>
+<h2 id="Do-some-setup"><a href="#Do-some-setup" class="headerlink" title="Do some setup"></a>Do some setup</h2><p>Once we get to that screen, we need to move into where the parse code is, to do some setup:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ cd /opt/bitnami/parse</span><br></pre></td></tr></table></figure>
+
+<p>Next, we have a file that we need to edit:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vi config.json</span><br></pre></td></tr></table></figure>
+
+<p>Inside the file, we can see the information of the server:</p>
+<figure>
+  <img src=config.png>
+</figure>
+
+<p>We can paste the information required to initialize the Parse Server in our android application.</p>
+<h2 id="Connect-to-the-Parse-Dashboard"><a href="#Connect-to-the-Parse-Dashboard" class="headerlink" title="Connect to the Parse Dashboard"></a>Connect to the Parse Dashboard</h2><p>We should be able to visit the Parse Dashboard by surfing to our server public IP address (which we can get from the AWS console) in our browser.</p>
+<figure>
+  <img src=url.png>
+</figure>
+
+<figure>
+  <img src=login.png>
+  <figcaption>Login page for the Parse Server</figcaption>
+</figure>
+
+<p>Get the user name and password in the terminal:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ cat bitnami_credentials</span><br></pre></td></tr></table></figure>
+
+<figure>
+  <img src=dashboard.png>
+  <figcaption>Log in successfully</figcaption>
+</figure>
+
+<h2 id="Configure-publicServerURL"><a href="#Configure-publicServerURL" class="headerlink" title="Configure publicServerURL"></a>Configure publicServerURL</h2><p>Let’s say we upload a photo to the parse server.</p>
+<p>When we click on the image link, it opens up a url using the localhost IP again.</p>
+<img src=link.png>
+
+<br/>
+
+<img src=localhost.png>
+
+<p>That’s a promblem. Because it means we can not get access to the photo in our program.</p>
+<blockquote><p>When using files on Parse, you will need to use the publicServerURL option in your Parse Server config. This is the URL that files will be accessed from, so it should be a URL that resolves to your Parse Server. Make sure to include your mount point in this URL.</p>
+<footer><strong>Parse's Documentation</strong></footer></blockquote>
+
+<p>The <code>publicServerURL</code> is explicitely required for those cases. Parse server injects the <code>publicServerURL</code> for all our files at runtime.</p>
+<p>Every file URL is replaced at runtime, with the full URL. If we set the <code>publicServerURL</code>, this will be set in all the responses.</p>
+<p>All we have to do is adding the <code>publicServerURL</code> parameter to the server.</p>
+<ol>
+<li><p><strong>Open the <code>config.json</code> file</strong></p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ cd /opt/bitnami/parse</span><br></pre></td></tr></table></figure>
+
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ vi config.json</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Add a new line below the <code>serverURL</code> parameter</strong></p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;publicServerURL&quot;: &quot;http://IP/parse&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Save it and restart Parse running</strong></p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ sudo /opt/bitnami/ctlscript.sh restart parse</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>Now we can refresh the Parse Dashboard page, and can get to the right URL to download photos successfully.</p>
+<p><br/><br/><br/><br/></p>
+<p><strong><em>References</em></strong></p>
+<p><a target="_blank" rel="noopener" href="https://community.bitnami.com/t/unable-to-find-opt-bitnami-apps-parse-htdocs-server-js/78200"><em>Unable to find &#x2F;opt&#x2F;bitnami&#x2F;apps&#x2F;parse&#x2F;htdocs&#x2F;server.js</em></a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#TroubleshootingInstancesConnectingPuTTY"><em>Error: Server refused our key or No supported authentication methods available</em></a></p>
+<p><a target="_blank" rel="noopener" href="https://community.bitnami.com/t/i-cannot-or-do-not-know-how-to-connect-to-the-parse-dashboard/97505"><em>I cannot or do not know how to connect to the parse dashboard</em></a></p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/38648071/cant-find-password-in-aws-system-log-for-new-ami-created-from-bitnami-wordpress"><em>Can’t find password in AWS System Log for new AMI created from Bitnami Wordpress AMI</em></a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/parse-community/parse-server/issues/4290"><em>Parse Server - Image files’ path returns localhost</em></a></p>
+<p><a target="_blank" rel="noopener" href="https://community.bitnami.com/t/unable-to-download-or-view-images-i-o-error/71400"><em>Unable to download or view images</em></a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/Foystor">Projects</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tags</a></li>
+         
+          <li><a href="/categories/">Categories</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Connect-to-the-instance-using-SSH-client"><span class="toc-number">1.</span> <span class="toc-text">Connect to the instance using SSH client</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Do-some-setup"><span class="toc-number">2.</span> <span class="toc-text">Do some setup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Connect-to-the-Parse-Dashboard"><span class="toc-number">3.</span> <span class="toc-text">Connect to the Parse Dashboard</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Configure-publicServerURL"><span class="toc-number">4.</span> <span class="toc-text">Configure publicServerURL</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://foystor.github.io/2022/03/15/set-up-aws-parse-server/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://foystor.github.io/2022/03/15/set-up-aws-parse-server/&text=Set up AWS EC2 Parse Server in Android"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://foystor.github.io/2022/03/15/set-up-aws-parse-server/&title=Set up AWS EC2 Parse Server in Android"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://foystor.github.io/2022/03/15/set-up-aws-parse-server/&is_video=false&description=Set up AWS EC2 Parse Server in Android"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Set up AWS EC2 Parse Server in Android&body=Check out this article: https://foystor.github.io/2022/03/15/set-up-aws-parse-server/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://foystor.github.io/2022/03/15/set-up-aws-parse-server/&title=Set up AWS EC2 Parse Server in Android"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://foystor.github.io/2022/03/15/set-up-aws-parse-server/&title=Set up AWS EC2 Parse Server in Android"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://foystor.github.io/2022/03/15/set-up-aws-parse-server/&title=Set up AWS EC2 Parse Server in Android"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://foystor.github.io/2022/03/15/set-up-aws-parse-server/&title=Set up AWS EC2 Parse Server in Android"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://foystor.github.io/2022/03/15/set-up-aws-parse-server/&name=Set up AWS EC2 Parse Server in Android&description=&lt;p&gt;I learned Android along with &lt;a href=&#34;https://www.udemy.com/course/the-complete-android-oreo-developer-course/&#34;&gt;The Complete Android Oreo Developer Course&lt;/a&gt; and was stuck in the Instagram Clone chapter when I tried to set up the AWS EC2 Parse Server.&lt;/p&gt;
+&lt;p&gt;After googling many times, I finally figured it out and got access to the Parse Dashboard!&lt;/p&gt;
+&lt;p&gt;If you also have trouble setting up the Parse Server, just go ahead and see if my solutions would inspire you.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://foystor.github.io/2022/03/15/set-up-aws-parse-server/&t=Set up AWS EC2 Parse Server in Android"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    Foystor
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Foystor">Projects</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
