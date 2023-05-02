@@ -518,9 +518,9 @@
             
             <tag> Java </tag>
             
-            <tag> JPA </tag>
-            
             <tag> JDBC </tag>
+            
+            <tag> JPA </tag>
             
             <tag> Hibernate </tag>
             
@@ -899,9 +899,9 @@
       
         <tags>
             
-            <tag> Java </tag>
-            
             <tag> Spring Boot </tag>
+            
+            <tag> Java </tag>
             
             <tag> Spring MVC </tag>
             
@@ -928,9 +928,9 @@
       
         <tags>
             
-            <tag> Java </tag>
-            
             <tag> Spring Boot </tag>
+            
+            <tag> Java </tag>
             
             <tag> Spring MVC </tag>
             
@@ -957,9 +957,9 @@
       
         <tags>
             
-            <tag> Java </tag>
-            
             <tag> Spring Boot </tag>
+            
+            <tag> Java </tag>
             
             <tag> Intellij </tag>
             

@@ -227,7 +227,7 @@
   </url>
   
   <url>
-    <loc>https://foystor.github.io/search/index.html</loc>
+    <loc>https://foystor.github.io/categories/index.html</loc>
     
     <lastmod>2023-04-29</lastmod>
     
@@ -236,7 +236,7 @@
   </url>
   
   <url>
-    <loc>https://foystor.github.io/categories/index.html</loc>
+    <loc>https://foystor.github.io/search/index.html</loc>
     
     <lastmod>2023-04-29</lastmod>
     
@@ -272,25 +272,16 @@
   </url>
   
   <url>
-    <loc>https://foystor.github.io/2022/03/18/java-design-patterns/</loc>
-    
-    <lastmod>2023-04-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://foystor.github.io/2022/07/30/java-lang-ClassNotFoundException-graphql-execution-batched-Batched/</loc>
-    
-    <lastmod>2023-04-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://foystor.github.io/2022/07/30/java-lang-ClassNotFoundException-com-sun-xml-internal-bind-v2-ContextFactory/</loc>
+    
+    <lastmod>2023-04-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://foystor.github.io/2022/03/18/java-design-patterns/</loc>
     
     <lastmod>2023-04-29</lastmod>
     
@@ -308,6 +299,15 @@
   </url>
   
   <url>
+    <loc>https://foystor.github.io/2022/07/30/java-lang-ClassNotFoundException-graphql-execution-batched-Batched/</loc>
+    
+    <lastmod>2023-04-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://foystor.github.io/2022/06/09/hexo-theme-submodule/</loc>
     
     <lastmod>2023-04-29</lastmod>
@@ -317,7 +317,7 @@
   </url>
   
   <url>
-    <loc>https://foystor.github.io/2022/08/01/failed-to-run-spring-boot-rest-api-with-swagger/</loc>
+    <loc>https://foystor.github.io/2022/03/24/dynamic-proxy-and-UndeclaredThrowableException/</loc>
     
     <lastmod>2023-04-29</lastmod>
     
@@ -326,7 +326,7 @@
   </url>
   
   <url>
-    <loc>https://foystor.github.io/2022/03/24/dynamic-proxy-and-UndeclaredThrowableException/</loc>
+    <loc>https://foystor.github.io/2022/08/01/failed-to-run-spring-boot-rest-api-with-swagger/</loc>
     
     <lastmod>2023-04-29</lastmod>
     
@@ -407,6 +407,20 @@
 
   
   <url>
+    <loc>https://foystor.github.io/tags/Webpack/</loc>
+    <lastmod>2023-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://foystor.github.io/tags/Node-js/</loc>
+    <lastmod>2023-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://foystor.github.io/tags/CSS/</loc>
     <lastmod>2023-05-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -414,14 +428,35 @@
   </url>
   
   <url>
-    <loc>https://foystor.github.io/tags/Java/</loc>
+    <loc>https://foystor.github.io/tags/Spring-Boot/</loc>
     <lastmod>2023-05-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://foystor.github.io/tags/Spring-Boot/</loc>
+    <loc>https://foystor.github.io/tags/SLF4J/</loc>
+    <lastmod>2023-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://foystor.github.io/tags/Log4j/</loc>
+    <lastmod>2023-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://foystor.github.io/tags/Logging/</loc>
+    <lastmod>2023-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://foystor.github.io/tags/Java/</loc>
     <lastmod>2023-05-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -436,13 +471,6 @@
   
   <url>
     <loc>https://foystor.github.io/tags/Testing/</loc>
-    <lastmod>2023-05-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://foystor.github.io/tags/Webpack/</loc>
     <lastmod>2023-05-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -498,13 +526,6 @@
   </url>
   
   <url>
-    <loc>https://foystor.github.io/tags/Spring-MVC/</loc>
-    <lastmod>2023-05-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://foystor.github.io/tags/Spring-Cloud/</loc>
     <lastmod>2023-05-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -526,21 +547,7 @@
   </url>
   
   <url>
-    <loc>https://foystor.github.io/tags/SLF4J/</loc>
-    <lastmod>2023-05-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://foystor.github.io/tags/Log4j/</loc>
-    <lastmod>2023-05-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://foystor.github.io/tags/Logging/</loc>
+    <loc>https://foystor.github.io/tags/Spring-MVC/</loc>
     <lastmod>2023-05-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -548,13 +555,6 @@
   
   <url>
     <loc>https://foystor.github.io/tags/Tomcat/</loc>
-    <lastmod>2023-05-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://foystor.github.io/tags/Node-js/</loc>
     <lastmod>2023-05-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -582,20 +582,6 @@
   </url>
   
   <url>
-    <loc>https://foystor.github.io/tags/DataSource/</loc>
-    <lastmod>2023-05-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://foystor.github.io/tags/MySQL/</loc>
-    <lastmod>2023-05-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://foystor.github.io/tags/Swagger/</loc>
     <lastmod>2023-05-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -604,6 +590,13 @@
   
   <url>
     <loc>https://foystor.github.io/tags/Git/</loc>
+    <lastmod>2023-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://foystor.github.io/tags/Hexo/</loc>
     <lastmod>2023-05-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -624,14 +617,7 @@
   </url>
   
   <url>
-    <loc>https://foystor.github.io/tags/Hexo/</loc>
-    <lastmod>2023-05-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://foystor.github.io/tags/GraphQL/</loc>
+    <loc>https://foystor.github.io/tags/JDBC/</loc>
     <lastmod>2023-05-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -639,20 +625,6 @@
   
   <url>
     <loc>https://foystor.github.io/tags/JPA/</loc>
-    <lastmod>2023-05-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://foystor.github.io/tags/Persistence-Context/</loc>
-    <lastmod>2023-05-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://foystor.github.io/tags/JDBC/</loc>
     <lastmod>2023-05-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -680,6 +652,34 @@
   </url>
   
   <url>
+    <loc>https://foystor.github.io/tags/GraphQL/</loc>
+    <lastmod>2023-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://foystor.github.io/tags/Persistence-Context/</loc>
+    <lastmod>2023-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://foystor.github.io/tags/DataSource/</loc>
+    <lastmod>2023-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://foystor.github.io/tags/MySQL/</loc>
+    <lastmod>2023-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://foystor.github.io/tags/SQL/</loc>
     <lastmod>2023-05-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -701,6 +701,13 @@
   </url>
   
   <url>
+    <loc>https://foystor.github.io/tags/Manga/</loc>
+    <lastmod>2023-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://foystor.github.io/tags/GitHub/</loc>
     <lastmod>2023-05-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -709,13 +716,6 @@
   
   <url>
     <loc>https://foystor.github.io/tags/Tools/</loc>
-    <lastmod>2023-05-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://foystor.github.io/tags/Manga/</loc>
     <lastmod>2023-05-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
